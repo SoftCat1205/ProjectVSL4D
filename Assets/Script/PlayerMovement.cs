@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
 
-    [HideInInspector] public Vector2 moveInput;
+    [HideInInspector] public Vector2 moveDir;
     [HideInInspector] public float lastX; //Stores the latest X vector input 
     [HideInInspector] public float lastY; //Stores the latest Y vector input
 
@@ -26,21 +26,21 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        moveInput = value.Get<Vector2>();
+        moveDir = value.Get<Vector2>();
 
-        if (moveInput.x != 0)
+        if (moveDir.x != 0)
         {
-            lastX = moveInput.x;
+            lastX = moveDir.x;
         }
 
-        if (moveInput.y != 0)
+        if (moveDir.y != 0)
         {
-            lastY = moveInput.y;
+            lastY = moveDir.y;
         }
     }
 
     void Move()
     {
-        rb.linearVelocity = moveInput.normalized * moveSpeed;
+        rb.linearVelocity = moveDir.normalized * moveSpeed;
     }
 }

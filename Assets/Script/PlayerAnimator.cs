@@ -19,7 +19,7 @@ public class PlayerAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pm.moveInput.x != 0 || pm.moveInput.y != 0)
+        if (pm.moveDir.x != 0 || pm.moveDir.y != 0)
         {
             am.SetBool("Move", true);
 
