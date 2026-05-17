@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
+
     //Reference
     private Rigidbody2D rb;
 
@@ -12,10 +14,12 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public Vector2 moveDir;
     [HideInInspector] public float lastX; //Stores the latest X vector input 
     [HideInInspector] public float lastY; //Stores the latest Y vector input
+    [HideInInspector] public Vector2 lastDir;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        Instance = this;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -36,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
         if (moveDir.y != 0)
         {
             lastY = moveDir.y;
+        }
+
+        if (moveDir.x != 0 || moveDir.y != 0)
+        {
+            lastDir = new Vector2(moveDir.x, moveDir.y);
         }
     }
 

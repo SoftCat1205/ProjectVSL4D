@@ -50,12 +50,18 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 /warnaserror+:NU1605
 
 [sourceFiles]
-Assets/Script/
- CameraMovement.cs
+Assets/Script/Map/
  MapController.cs
+ PropRandomizer.cs
+Assets/Script/Player/
+ CameraMovement.cs
  PlayerAnimator.cs
  PlayerMovement.cs
- PropRandomizer.cs
+Assets/Script/Weapon/
+ KnifeController.cs
+ KnifeProjectile.cs
+ ProjectileWeaponBehaviour.cs
+ WeaponController.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
