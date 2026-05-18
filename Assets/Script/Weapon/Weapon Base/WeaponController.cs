@@ -3,6 +3,7 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     [Header("Weapon Stats")]
+    public WeaponScriptableObject weaponData;
     public GameObject prefab;
     public float damage;
     public float speed;

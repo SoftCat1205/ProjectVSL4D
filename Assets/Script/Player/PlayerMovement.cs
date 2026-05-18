@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement Instance;
 
     //Reference
-    private Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
 
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
+        lastDir = new Vector2(1, 0);
     }
 
     void FixedUpdate()

@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class KnifeProjectile : ProjectileWeaponBehaviour
+public class KnifeBehaviour : ProjectileWeaponBehaviour
 {
     KnifeController kc;
     Vector3 dir;
