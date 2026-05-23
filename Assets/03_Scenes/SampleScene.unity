@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 1139269995}
   - component: {fileID: 1139269992}
   - component: {fileID: 1139269996}
+  - component: {fileID: 1139269997}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -584,7 +585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   rb: {fileID: 0}
-  moveSpeed: 5
+  characterData: {fileID: 11400000, guid: b0ed2f31c8aefc3418100cb8a6aa33ee, type: 2}
   moveDir: {x: 0, y: 0}
   lastX: 0
   lastY: 0
@@ -689,6 +690,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4038f866f2a5d7445a443f225e880dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
+--- !u!114 &1139269997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139269987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df755c7c11686a44894ff2a048e9221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  characterData: {fileID: 11400000, guid: b0ed2f31c8aefc3418100cb8a6aa33ee, type: 2}
+  experience: 0
+  level: 1
+  experienceCap: 50
+  levelRanges:
+  - startLevel: 2
+    endLevel: 5
+    experienceCapIncrease: 100
+  - startLevel: 6
+    endLevel: 10
+    experienceCapIncrease: 150
+  - startLevel: 11
+    endLevel: 9999
+    experienceCapIncrease: 0
+  invincibilityDuration: 0
 --- !u!1 &1805628674
 GameObject:
   m_ObjectHideFlags: 0

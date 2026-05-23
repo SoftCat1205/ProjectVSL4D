@@ -15,4 +15,7 @@ public class EnemyScriptableObject : ScriptableObject
 
     [SerializeField] float damage;
     public float Damage { get => damage; private set => damage = value; }
+
+    [SerializeField] int experienceDrop;
+    public int ExperienceDrop { get => experienceDrop; private set => experienceDrop = value; }
 }

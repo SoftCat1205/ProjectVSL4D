@@ -7,9 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Reference
     [HideInInspector] public Rigidbody2D rb;
-
-    [Header("Movement")]
-    public float moveSpeed = 5f;
+    public CharacterScriptableObject characterData;
 
     [HideInInspector] public Vector2 moveDir;
     [HideInInspector] public float lastX; //Stores the latest X vector input 
@@ -51,6 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        rb.linearVelocity = moveDir.normalized * moveSpeed;
+        rb.linearVelocity = moveDir.normalized * characterData.MoveSpeed;
     }
 }
