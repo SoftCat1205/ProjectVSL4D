@@ -14,6 +14,6 @@ public class KnifeBehaviour : ProjectileWeaponBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        transform.position += dir * weaponData.Speed * Time.deltaTime;
+        transform.position += dir * currentSpeed * Time.deltaTime;
     }
 }

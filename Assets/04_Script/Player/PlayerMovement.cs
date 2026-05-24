@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Reference
     [HideInInspector] public Rigidbody2D rb;
-    public CharacterScriptableObject characterData;
+    PlayerStats ps;
 
     [HideInInspector] public Vector2 moveDir;
     [HideInInspector] public float lastX; //Stores the latest X vector input 
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
+        ps = GetComponent<PlayerStats>();
         lastDir = new Vector2(1, 0);
     }
 
@@ -49,6 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        rb.linearVelocity = moveDir.normalized * characterData.MoveSpeed;
+        rb.linearVelocity = moveDir.normalized * ps.currentMoveSpeed;
     }
 }

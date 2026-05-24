@@ -4,6 +4,9 @@ using UnityEngine;
 public class WeaponScriptableObject : ScriptableObject
 {
     [Header("Weapon Stats")]
+    [SerializeField] GameObject controller;
+    public GameObject Controller { get => controller; private set => controller = value; }
+
     [SerializeField] GameObject prefab;
     public GameObject Prefab { get => prefab; private set => prefab = value; }
 

@@ -3,10 +3,15 @@ using UnityEngine.InputSystem.Controls;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public EnemyScriptableObject enemyData;
+    EnemyStats es;
+
+    void Start()
+    {
+        es = GetComponent<EnemyStats>();
+    }
 
     void FixedUpdate()
     {
-        transform.position = Vector2.MoveTowards(transform.position, PlayerMovement.Instance.transform.position, enemyData.MoveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, PlayerMovement.Instance.transform.position, es.currentMoveSpeed * Time.deltaTime);
     }
 }

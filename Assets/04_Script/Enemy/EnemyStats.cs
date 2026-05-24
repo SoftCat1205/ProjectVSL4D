@@ -5,17 +5,20 @@ public class EnemyStats : MonoBehaviour
     PlayerStats ps;
     public EnemyScriptableObject enemyData;
 
-    float currentMoveSpeed;
-    float currentHealth;
-    float currentDamage;
+    [HideInInspector] public float currentMoveSpeed;
+    [HideInInspector] public float currentHealth;
+    [HideInInspector] public float currentDamage;
 
     void Awake()
     {
-        ps = PlayerStats.Instance;
-
         currentMoveSpeed = enemyData.MoveSpeed;
         currentHealth = enemyData.MaxHealth;
         currentDamage = enemyData.Damage;
+    }
+
+    void Start()
+    {
+        ps = PlayerStats.Instance;
     }
 
     public void TakeDamage(float dmg)
