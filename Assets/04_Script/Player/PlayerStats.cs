@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -44,7 +46,10 @@ public class PlayerStats : MonoBehaviour
     {
         Instance = this;
 
-        weaponData = WeaponSelector.GetData();
+        if (WeaponSelector.Instance != null)
+        {
+            weaponData = WeaponSelector.GetData();
+        }
 
         currentHealth = characterData.MaxHealth;
         currentRecovery = characterData.Recovery;

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64b34a3033475814683617576fdeb03b, type: 3}
-  m_Name: Bat Enemy
+  m_Name: RedBat Enemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyScriptableObject
   prefab: {fileID: 2426143171147244075, guid: 7d4a0f7c9060ff249be828af6d3acdb0, type: 3}
   moveSpeed: 0
-  maxHealth: 10
+  maxHealth: 7
   damage: 10
   experienceDrop: 0
