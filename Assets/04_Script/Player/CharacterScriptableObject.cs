@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CharacterScriptableObject", menuName = "ScriptableObjects  /Character")]
+[CreateAssetMenu(fileName = "CharacterScriptableObject", menuName = "ScriptableObjects/Character")]
 public class CharacterScriptableObject : ScriptableObject
 {
     [SerializeField] GameObject startingWeapon;

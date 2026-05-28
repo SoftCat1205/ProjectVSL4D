@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GarlicBehaviour : MaleeWeaponBehaviour
+public class GarlicBehaviour : WeaponBehaviour
 {
     List<GameObject> markedEnemies;
 
@@ -16,7 +16,7 @@ public class GarlicBehaviour : MaleeWeaponBehaviour
         if (col.CompareTag("Enemy") && !markedEnemies.Contains(col.gameObject))
         {
             EnemyStats enemy = col.GetComponent<EnemyStats>();
-            enemy.TakeDamage(currentDamage);
+            enemy.TakeDamage(GetCurrentDamage());
 
             markedEnemies.Add(col.gameObject);
         }

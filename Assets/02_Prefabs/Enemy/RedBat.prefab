@@ -177,7 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b111be7e3fb671c4cbec49fbb6e4c82a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  enemyData: {fileID: 11400000, guid: 799e351f718f1aa4d9c81a37ff62ce46, type: 2}
+  enemyData: {fileID: 11400000, guid: f6a66ffaa3052804e9914be5c5dc3cf4, type: 2}
   currentMoveSpeed: 0
   currentHealth: 0
   currentDamage: 0
+  despawnDistance: 20

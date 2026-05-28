@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyScriptableObject
   prefab: {fileID: 2426143171147244075, guid: 7d4a0f7c9060ff249be828af6d3acdb0, type: 3}
   moveSpeed: 0
-  maxHealth: 7
+  maxHealth: 15
   damage: 10
   experienceDrop: 0

@@ -1,30 +1,14 @@
 using System;
 using UnityEngine;
 
-public class ProjectileWeaponBehaviour : MonoBehaviour
+public class ProjectileWeaponBehaviour : WeaponBehaviour
 {
-    public WeaponScriptableObject weaponData;
-
-    public float destoryAfterSeconds;
-    protected PlayerMovement pm;
-
-    protected float currentDamage;
-    protected float currentSpeed;
-    protected float currentCooldownDuration;
-    protected int currentPierce;
-
-    protected virtual void Awake()
+    protected override void Awake()
     {
         pm = PlayerMovement.Instance;
         currentDamage = weaponData.Damage;
         currentSpeed = weaponData.Speed;
         currentCooldownDuration = weaponData.CooldownDuration;
-        currentPierce = weaponData.Pierce;
-    }
-
-    protected virtual void Start()
-    {
-        Destroy(gameObject, destoryAfterSeconds);
     }
 
     public void DirectionChecker()
@@ -36,21 +20,12 @@ public class ProjectileWeaponBehaviour : MonoBehaviour
             Quaternion.Euler(0, 0, angle);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    protected override void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Enemy"))
         {
             EnemyStats enemy = col.GetComponent<EnemyStats>();
-            enemy.TakeDamage(currentDamage);
-            ReducePierce();
-        }
-    }
-
-    void ReducePierce()
-    {
-        currentPierce--;
-        if (currentPierce <= 0)
-        {
+            enemy.TakeDamage(GetCurrentDamage());
             Destroy(gameObject);
         }
     }

@@ -1,29 +1,29 @@
 using System;
 using UnityEngine;
 
-public class MaleeWeaponBehaviour : MonoBehaviour
+public class WeaponBehaviour : MonoBehaviour
 {
     public WeaponScriptableObject weaponData;
 
     public float destoryAfterSeconds;
     protected PlayerMovement pm;
+    protected PlayerStats ps;
 
     protected float currentDamage;
     protected float currentSpeed;
     protected float currentCooldownDuration;
-    protected int currentPierce;
 
     protected virtual void Awake()
     {
-        pm = PlayerMovement.Instance;
         currentDamage = weaponData.Damage;
         currentSpeed = weaponData.Speed;
         currentCooldownDuration = weaponData.CooldownDuration;
-        currentPierce = weaponData.Pierce;
     }
 
     protected virtual void Start()
     {
+        pm = PlayerMovement.Instance;
+        ps = PlayerStats.Instance;
         Destroy(gameObject, destoryAfterSeconds);
     }
 
@@ -32,7 +32,12 @@ public class MaleeWeaponBehaviour : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             EnemyStats enemy = col.GetComponent<EnemyStats>();
-            enemy.TakeDamage(currentDamage);
+            enemy.TakeDamage(GetCurrentDamage());
         }
+    }
+
+    protected float GetCurrentDamage()
+    {
+        return currentDamage * ps.currentMight;
     }
 }
