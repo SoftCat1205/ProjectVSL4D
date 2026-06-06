@@ -15,9 +15,4 @@ public class PassiveItem : MonoBehaviour
         ps = PlayerStats.Instance;
         ApplyModifier();
     }
-
-    void Update()
-    {
-
-    }
 }

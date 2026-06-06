@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2129388195235517138}
   - component: {fileID: 7385747878643968737}
   m_Layer: 0
-  m_Name: Wing
+  m_Name: Wing Lv.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
