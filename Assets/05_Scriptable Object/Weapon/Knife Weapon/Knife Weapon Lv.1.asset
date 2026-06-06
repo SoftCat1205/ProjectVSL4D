@@ -18,4 +18,5 @@ MonoBehaviour:
   speed: 10
   cooldownDuration: 1
   level: 1
-  nextLevelPrefab: {fileID: 0}
+  nextLevelPrefab: {fileID: 2487452295958376626, guid: 82c8caf19aeed1f4f9fc725b3bd5243c, type: 3}
+  icon: {fileID: -1324318189544361227, guid: 925e872fdfa5fe84f944e92a94c6d3be, type: 3}
