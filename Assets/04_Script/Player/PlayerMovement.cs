@@ -23,14 +23,26 @@ public class PlayerMovement : MonoBehaviour
         lastDir = new Vector2(1, 0);
     }
 
+    void OnEnable()
+    {
+        InputManager.Instance.inputActions.Player.Move.performed += OnMove;
+        InputManager.Instance.inputActions.Player.Move.canceled += OnMove;
+    }
+
+    void OnDisable()
+    {
+        InputManager.Instance.inputActions.Player.Move.performed -= OnMove;
+        InputManager.Instance.inputActions.Player.Move.canceled -= OnMove;
+    }
+
     void FixedUpdate()
     {
         Move();
     }
 
-    void OnMove(InputValue value)
+    void OnMove(InputAction.CallbackContext context)
     {
-        moveDir = value.Get<Vector2>();
+        moveDir = context.ReadValue<Vector2>();
 
         if (moveDir.x != 0)
         {

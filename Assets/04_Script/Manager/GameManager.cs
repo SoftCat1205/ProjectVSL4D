@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,9 +13,27 @@ public class GameManager : MonoBehaviour
     public GameState currentState;
     public GameState previousState;
 
-    void Update() 
+    [Header("UI")]
+    public GameObject pauseScreen;
+
+    void Awake()
     {
-        switch(currentState)
+        pauseScreen.SetActive(false);
+    }
+
+    void OnEnable()
+    {
+        InputManager.Instance.inputActions.Player.Pause.performed += OnPause;
+    }
+
+    void OnDisable()
+    {
+        InputManager.Instance.inputActions.Player.Pause.performed -= OnPause;
+    }
+
+    void Update()
+    {
+        switch (currentState)
         {
             case GameState.Gameplay:
 
@@ -28,7 +47,25 @@ public class GameManager : MonoBehaviour
             default:
                 Debug.LogWarning("State Does Not Exist");
                 break;
-        }    
+        }
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        switch (currentState)
+        {
+            case GameState.Gameplay:
+                PauseGame();
+                break;
+            case GameState.Paused:
+                ResumeGame();
+                break;
+            case GameState.Gameover:
+                break;
+            default:
+                Debug.LogWarning("State Does Not Exist");
+                break;
+        }
     }
 
     public void ChangeState(GameState newState)
@@ -39,26 +76,23 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if(currentState == GameState.Gameplay)
+        if (currentState == GameState.Gameplay)
         {
             ChangeState(GameState.Paused);
             Time.timeScale = 0f;
-            Debug.Log("Game is paused");
+            pauseScreen.SetActive(true);
+            Debug.Log("Game paused");
         }
     }
 
     public void ResumeGame()
     {
-        if(currentState == GameState.Paused)
+        if (currentState == GameState.Paused)
         {
             ChangeState(GameState.Gameplay);
             Time.timeScale = 1f;
-            Debug.Log("Game is paused");
+            pauseScreen.SetActive(false);
+            Debug.Log("Game resumed");
         }
-    }
-
-    public void OnPause()
-    {
-        Debug.Log("Escape key detected");
     }
 }

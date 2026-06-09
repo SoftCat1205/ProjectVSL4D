@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "ProjectVSL4D.slnx",
+    "dotnet.defaultSolution": "Project VSL4D.slnx",
     "git.ignoreLimitWarning": true
 }
