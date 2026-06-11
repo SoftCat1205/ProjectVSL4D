@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     public enum GameState
     {
         Gameplay,
@@ -13,22 +16,43 @@ public class GameManager : MonoBehaviour
     public GameState currentState;
     public GameState previousState;
 
+    private bool isStatus = false;
+
     [Header("UI")]
     public GameObject pauseScreen;
+    public GameObject StatusScreen;
+
+    public TextMeshProUGUI currentMaxHealthDisplay;
+    public TextMeshProUGUI currentHealthDisplay;
+    public TextMeshProUGUI currentRecoveryDisplay;
+    public TextMeshProUGUI currentArmourDisplay;
+    public TextMeshProUGUI currentAbilityHasteDisplay;
+    public TextMeshProUGUI currentMoveSpeedDisplay;
+    public TextMeshProUGUI currentVisionDisplay;
+
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
         pauseScreen.SetActive(false);
     }
 
     void OnEnable()
     {
         InputManager.Instance.inputActions.Player.Pause.performed += OnPause;
+        InputManager.Instance.inputActions.Player.Status.performed += OnStatus;
     }
 
     void OnDisable()
     {
         InputManager.Instance.inputActions.Player.Pause.performed -= OnPause;
+        InputManager.Instance.inputActions.Player.Status.performed -= OnStatus;
     }
 
     void Update()
@@ -47,6 +71,15 @@ public class GameManager : MonoBehaviour
             default:
                 Debug.LogWarning("State Does Not Exist");
                 break;
+        }
+    }
+
+    public void OnStatus(InputAction.CallbackContext context)
+    {
+        if (currentState != GameState.Gameover)
+        {
+            isStatus = !isStatus;
+            StatusScreen.SetActive(isStatus);
         }
     }
 

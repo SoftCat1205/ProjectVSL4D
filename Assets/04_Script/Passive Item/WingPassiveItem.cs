@@ -4,7 +4,7 @@ public class WingPassiveItem : PassiveItem
 {
     protected override void ApplyModifier()
     {
-        ps.currentMoveSpeed *= 1 + passiveItemData.Multiplier;
-        ps.currentMoveSpeed *= 1 + passiveItemData.Additive;
+        ps.CurrentMoveSpeed *= 1 + passiveItemData.Multiplier;
+        ps.CurrentMoveSpeed *= 1 + passiveItemData.Additive;
     }
 }

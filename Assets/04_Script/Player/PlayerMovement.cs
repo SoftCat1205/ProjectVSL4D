@@ -62,6 +62,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        rb.linearVelocity = moveDir.normalized * ps.currentMoveSpeed;
+        rb.linearVelocity = moveDir.normalized * ps.CurrentMoveSpeed;
     }
 }

@@ -38,6 +38,6 @@ public class WeaponBehaviour : MonoBehaviour
 
     protected float GetCurrentDamage()
     {
-        return currentDamage * ps.currentMight;
+        return currentDamage;
     }
 }

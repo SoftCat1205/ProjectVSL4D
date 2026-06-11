@@ -12,12 +12,15 @@ public class CharacterScriptableObject : ScriptableObject
     [SerializeField] float recovery;
     public float Recovery { get => recovery; private set => recovery = value; }
 
+    [SerializeField] float armour;
+    public float Armour { get => armour; private set => armour = value; }
+
     [SerializeField] float moveSpeed;
     public float MoveSpeed { get => moveSpeed; private set => moveSpeed = value; }
 
-    [SerializeField] float might;
-    public float Might { get => might; private set => might = value; }
+    [SerializeField] float abilityHaste;
+    public float AbilityHaste { get => abilityHaste; private set => abilityHaste = value; }
 
-    [SerializeField] float projectileSpeed;
-    public float ProjectileSpeed { get => projectileSpeed; private set => projectileSpeed = value; }
+    [SerializeField] float vision;
+    public float Vision { get => vision; private set => vision = value; }
 }

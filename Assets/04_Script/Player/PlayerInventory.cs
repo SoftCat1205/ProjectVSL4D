@@ -3,9 +3,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour
+public class PlayerInventory : MonoBehaviour
 {
-    public static InventoryManager Instance;
+    public static PlayerInventory Instance;
 
     public List<WeaponController> weaponSlots = new(6);
     public int[] weaponLevels = new int[6];

@@ -15,7 +15,6 @@ public class InputManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
 
         inputActions = new InputSystem_Actions();
