@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public GameState currentState;
     public GameState previousState;
 
-    private bool isStatus = false;
+    private bool _isStatusScreenOpen = false;
 
     [Header("UI")]
     public GameObject pauseScreen;
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         pauseScreen.SetActive(false);
+        StatusScreen.SetActive(_isStatusScreenOpen);
     }
 
     void OnEnable()
@@ -78,8 +79,8 @@ public class GameManager : MonoBehaviour
     {
         if (currentState != GameState.Gameover)
         {
-            isStatus = !isStatus;
-            StatusScreen.SetActive(isStatus);
+            _isStatusScreenOpen = !_isStatusScreenOpen;
+            StatusScreen.SetActive(_isStatusScreenOpen);
         }
     }
 
