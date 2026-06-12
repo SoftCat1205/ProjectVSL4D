@@ -8,9 +8,10 @@ public class PlayerStats : MonoBehaviour
     //Reference
     public static PlayerStats Instance;
 
+    public event Action PlayerDied;
+
     public CharacterScriptableObject characterData;
     public WeaponScriptableObject weaponData;
-
 
     //Current Stats
     [HideInInspector] public float currentMaxHealth;
@@ -254,7 +255,7 @@ public class PlayerStats : MonoBehaviour
 
     public void Kill()
     {
-        Destroy(gameObject);
+        PlayerDied?.Invoke();
     }
 
     void Recover()

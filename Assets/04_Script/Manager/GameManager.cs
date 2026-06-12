@@ -8,19 +8,18 @@ public class GameManager : MonoBehaviour
 
     public enum GameState
     {
-        Gameplay,
+        GamePlay,
         Paused,
-        Gameover
+        GameOver
     }
 
     public GameState currentState;
     public GameState previousState;
 
-    private bool _isStatusScreenOpen = false;
-
     [Header("UI")]
     public GameObject pauseScreen;
     public GameObject StatusScreen;
+    public GameObject ResultScreen;
 
     public TextMeshProUGUI currentMaxHealthDisplay;
     public TextMeshProUGUI currentHealthDisplay;
@@ -29,6 +28,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI currentAbilityHasteDisplay;
     public TextMeshProUGUI currentMoveSpeedDisplay;
     public TextMeshProUGUI currentVisionDisplay;
+
+    private bool _isStatusScreenOpen = false;
+    private bool _isGameOver = false;
+
+    private int _playersAlive;
 
 
     void Awake()
@@ -42,6 +46,7 @@ public class GameManager : MonoBehaviour
 
         pauseScreen.SetActive(false);
         StatusScreen.SetActive(_isStatusScreenOpen);
+        ResultScreen.SetActive(_isGameOver);
     }
 
     void OnEnable()
@@ -56,18 +61,35 @@ public class GameManager : MonoBehaviour
         InputManager.Instance.inputActions.Player.Status.performed -= OnStatus;
     }
 
+    void Start()
+    {
+        PlayerStats[] players = FindObjectsByType<PlayerStats>(FindObjectsSortMode.None);
+
+        _playersAlive = players.Length;
+        Debug.Log(_playersAlive);
+
+        foreach (PlayerStats player in players)
+        {
+            player.PlayerDied += OnPlayerDeath;
+        }
+    }
+
     void Update()
     {
         switch (currentState)
         {
-            case GameState.Gameplay:
+            case GameState.GamePlay:
 
                 break;
             case GameState.Paused:
 
                 break;
-            case GameState.Gameover:
-
+            case GameState.GameOver:
+                if (!_isGameOver)
+                {
+                    _isGameOver = true;
+                    Debug.Log("UPDATE GAME OVER");
+                }
                 break;
             default:
                 Debug.LogWarning("State Does Not Exist");
@@ -77,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     public void OnStatus(InputAction.CallbackContext context)
     {
-        if (currentState != GameState.Gameover)
+        if (currentState != GameState.GameOver)
         {
             _isStatusScreenOpen = !_isStatusScreenOpen;
             StatusScreen.SetActive(_isStatusScreenOpen);
@@ -88,13 +110,13 @@ public class GameManager : MonoBehaviour
     {
         switch (currentState)
         {
-            case GameState.Gameplay:
+            case GameState.GamePlay:
                 PauseGame();
                 break;
             case GameState.Paused:
                 ResumeGame();
                 break;
-            case GameState.Gameover:
+            case GameState.GameOver:
                 break;
             default:
                 Debug.LogWarning("State Does Not Exist");
@@ -110,7 +132,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (currentState == GameState.Gameplay)
+        if (currentState == GameState.GamePlay)
         {
             ChangeState(GameState.Paused);
             Time.timeScale = 0f;
@@ -123,10 +145,32 @@ public class GameManager : MonoBehaviour
     {
         if (currentState == GameState.Paused)
         {
-            ChangeState(GameState.Gameplay);
+            ChangeState(GameState.GamePlay);
             Time.timeScale = 1f;
             pauseScreen.SetActive(false);
             Debug.Log("Game resumed");
         }
+    }
+
+    public void OnPlayerDeath()
+    {
+        _playersAlive--;
+        Debug.Log("Player Died");
+
+        if (_playersAlive <= 0f)
+        {
+            GameOver();
+
+            Debug.Log(_playersAlive);
+        }
+    }
+
+    public void GameOver()
+    {
+        ChangeState(GameState.GameOver);
+        ResultScreen.SetActive(true);
+        Debug.Log("GAME OVER");
+        Time.timeScale = 0f;
+        InputManager.Instance.inputActions.Disable();
     }
 }
