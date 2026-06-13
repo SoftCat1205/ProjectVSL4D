@@ -6,21 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public enum GameState
-    {
-        GamePlay,
-        Paused,
-        GameOver
-    }
-
-    public GameState currentState;
-    public GameState previousState;
-
-    [Header("UI")]
-    public GameObject pauseScreen;
+    [Header("Screens")]
+    public GameObject SettingScreen;
     public GameObject StatusScreen;
     public GameObject ResultScreen;
 
+    [Header("Current Stat Displays")]
     public TextMeshProUGUI currentMaxHealthDisplay;
     public TextMeshProUGUI currentHealthDisplay;
     public TextMeshProUGUI currentRecoveryDisplay;
@@ -29,13 +20,20 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI currentMoveSpeedDisplay;
     public TextMeshProUGUI currentVisionDisplay;
 
+    [Header("Result Screen Displays")]
+
+
+    [Header("Timer")]
+    private float _currentTime;
+    public TextMeshProUGUI StopWatchDisplay;
+    private readonly float _maxTimeLimit = 10000;
+
+    private bool _isSettingScreenOpen = false;
     private bool _isStatusScreenOpen = false;
     private bool _isGameOver = false;
-
     private int _playersAlive;
 
-
-    void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -44,118 +42,72 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
-        pauseScreen.SetActive(false);
+        SettingScreen.SetActive(_isSettingScreenOpen);
         StatusScreen.SetActive(_isStatusScreenOpen);
         ResultScreen.SetActive(_isGameOver);
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
-        InputManager.Instance.inputActions.Player.Pause.performed += OnPause;
+        InputManager.Instance.inputActions.Player.Setting.performed += OnSetting;
         InputManager.Instance.inputActions.Player.Status.performed += OnStatus;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        InputManager.Instance.inputActions.Player.Pause.performed -= OnPause;
+        InputManager.Instance.inputActions.Player.Setting.performed -= OnSetting;
         InputManager.Instance.inputActions.Player.Status.performed -= OnStatus;
     }
 
-    void Start()
+    private void Start()
     {
         PlayerStats[] players = FindObjectsByType<PlayerStats>(FindObjectsSortMode.None);
 
         _playersAlive = players.Length;
-        Debug.Log(_playersAlive);
+        Debug.Log("There are " + _playersAlive + " player(s) alive.");
 
         foreach (PlayerStats player in players)
         {
+            player.PlayerLeveledUp += OnPlayerLevelUp;
             player.PlayerDied += OnPlayerDeath;
         }
     }
 
-    void Update()
+    private void Update()
     {
-        switch (currentState)
+        if (!_isGameOver)
         {
-            case GameState.GamePlay:
-
-                break;
-            case GameState.Paused:
-
-                break;
-            case GameState.GameOver:
-                if (!_isGameOver)
-                {
-                    _isGameOver = true;
-                    Debug.Log("UPDATE GAME OVER");
-                }
-                break;
-            default:
-                Debug.LogWarning("State Does Not Exist");
-                break;
+            UpdateCurrentTime();
         }
     }
 
     public void OnStatus(InputAction.CallbackContext context)
     {
-        if (currentState != GameState.GameOver)
+        if (!_isGameOver)
         {
             _isStatusScreenOpen = !_isStatusScreenOpen;
             StatusScreen.SetActive(_isStatusScreenOpen);
         }
     }
 
-    public void OnPause(InputAction.CallbackContext context)
+    public void OnSetting(InputAction.CallbackContext context)
     {
-        switch (currentState)
+        if (!_isGameOver)
         {
-            case GameState.GamePlay:
-                PauseGame();
-                break;
-            case GameState.Paused:
-                ResumeGame();
-                break;
-            case GameState.GameOver:
-                break;
-            default:
-                Debug.LogWarning("State Does Not Exist");
-                break;
+            _isSettingScreenOpen = !_isSettingScreenOpen;
+            SettingScreen.SetActive(_isSettingScreenOpen);
         }
     }
 
-    public void ChangeState(GameState newState)
+    public void OnPlayerLevelUp(PlayerStats playerStats)
     {
-        previousState = currentState;
-        currentState = newState;
-    }
 
-    public void PauseGame()
-    {
-        if (currentState == GameState.GamePlay)
-        {
-            ChangeState(GameState.Paused);
-            Time.timeScale = 0f;
-            pauseScreen.SetActive(true);
-            Debug.Log("Game paused");
-        }
-    }
-
-    public void ResumeGame()
-    {
-        if (currentState == GameState.Paused)
-        {
-            ChangeState(GameState.GamePlay);
-            Time.timeScale = 1f;
-            pauseScreen.SetActive(false);
-            Debug.Log("Game resumed");
-        }
     }
 
     public void OnPlayerDeath()
     {
         _playersAlive--;
-        Debug.Log("Player Died");
+        Debug.Log("A Player Died");
 
         if (_playersAlive <= 0f)
         {
@@ -167,10 +119,30 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        ChangeState(GameState.GameOver);
+        _isGameOver = true;
         ResultScreen.SetActive(true);
         Debug.Log("GAME OVER");
         Time.timeScale = 0f;
         InputManager.Instance.inputActions.Disable();
+    }
+
+    private void UpdateCurrentTime()
+    {
+        _currentTime += Time.deltaTime;
+
+        UpdateStopWatch();
+
+        if (_currentTime >= _maxTimeLimit)
+        {
+            GameOver();
+        }
+    }
+
+    private void UpdateStopWatch()
+    {
+        int minutes = Mathf.FloorToInt(_currentTime / 60);
+        int seconds = Mathf.FloorToInt(_currentTime % 60);
+
+        StopWatchDisplay.text = $"{minutes:00}:{seconds:00}";
     }
 }

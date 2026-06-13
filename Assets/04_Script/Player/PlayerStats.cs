@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     public static PlayerStats Instance;
 
     public event Action PlayerDied;
+    public event Action<PlayerStats> PlayerLeveledUp;
 
     public CharacterScriptableObject characterData;
     public WeaponScriptableObject weaponData;
@@ -221,6 +222,7 @@ public class PlayerStats : MonoBehaviour
         if (experience >= experienceCap)
         {
             level++;
+            PlayerLeveledUp?.Invoke(this);
             experience -= experienceCap;
 
             int experienceCapIncrease = 0;

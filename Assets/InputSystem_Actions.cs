@@ -72,7 +72,7 @@ using UnityEngine.InputSystem.Utilities;
 /// }
 /// </code>
 /// </example>
-public partial class @InputSystem_Actions : IInputActionCollection2, IDisposable
+public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
 {
     /// <summary>
     /// Provides access to the underlying asset instance.
@@ -138,7 +138,7 @@ public partial class @InputSystem_Actions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
+                    ""name"": ""Setting"",
                     ""type"": ""Button"",
                     ""id"": ""aeaba4d8-7522-4cba-8d2b-79622e0dce7c"",
                     ""expectedControlType"": """",
@@ -318,7 +318,7 @@ public partial class @InputSystem_Actions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Pause"",
+                    ""action"": ""Setting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -922,7 +922,7 @@ public partial class @InputSystem_Actions : IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Augment = m_Player.FindAction("Augment", throwIfNotFound: true);
-        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Setting = m_Player.FindAction("Setting", throwIfNotFound: true);
         m_Player_Status = m_Player.FindAction("Status", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -1022,7 +1022,7 @@ public partial class @InputSystem_Actions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Augment;
-    private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Setting;
     private readonly InputAction m_Player_Status;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -1056,9 +1056,9 @@ public partial class @InputSystem_Actions : IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Augment => m_Wrapper.m_Player_Augment;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Pause".
+        /// Provides access to the underlying input action "Player/Setting".
         /// </summary>
-        public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Setting => m_Wrapper.m_Player_Setting;
         /// <summary>
         /// Provides access to the underlying input action "Player/Status".
         /// </summary>
@@ -1104,9 +1104,9 @@ public partial class @InputSystem_Actions : IInputActionCollection2, IDisposable
             @Augment.started += instance.OnAugment;
             @Augment.performed += instance.OnAugment;
             @Augment.canceled += instance.OnAugment;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
+            @Setting.started += instance.OnSetting;
+            @Setting.performed += instance.OnSetting;
+            @Setting.canceled += instance.OnSetting;
             @Status.started += instance.OnStatus;
             @Status.performed += instance.OnStatus;
             @Status.canceled += instance.OnStatus;
@@ -1136,9 +1136,9 @@ public partial class @InputSystem_Actions : IInputActionCollection2, IDisposable
             @Augment.started -= instance.OnAugment;
             @Augment.performed -= instance.OnAugment;
             @Augment.canceled -= instance.OnAugment;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
+            @Setting.started -= instance.OnSetting;
+            @Setting.performed -= instance.OnSetting;
+            @Setting.canceled -= instance.OnSetting;
             @Status.started -= instance.OnStatus;
             @Status.performed -= instance.OnStatus;
             @Status.canceled -= instance.OnStatus;
@@ -1478,12 +1478,12 @@ public partial class @InputSystem_Actions : IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAugment(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Setting" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPause(InputAction.CallbackContext context);
+        void OnSetting(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Status" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

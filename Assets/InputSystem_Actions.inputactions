@@ -52,7 +52,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Setting",
                     "type": "Button",
                     "id": "aeaba4d8-7522-4cba-8d2b-79622e0dce7c",
                     "expectedControlType": "",
@@ -232,7 +232,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Pause",
+                    "action": "Setting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
