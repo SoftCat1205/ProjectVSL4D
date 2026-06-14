@@ -1823,6 +1823,7 @@ MonoBehaviour:
   SettingScreen: {fileID: 1587702263}
   StatusScreen: {fileID: 2054048604}
   ResultScreen: {fileID: 1159142932}
+  playerNameDisplay: {fileID: 0}
   currentMaxHealthDisplay: {fileID: 1421690884}
   currentHealthDisplay: {fileID: 1886894383}
   currentRecoveryDisplay: {fileID: 871018476}
@@ -1855,81 +1856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fe6d5f4a267d64294c5b7ecf0df594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
---- !u!1 &960882784
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 960882785}
-  - component: {fileID: 960882787}
-  - component: {fileID: 960882786}
-  m_Layer: 5
-  m_Name: Upgrade Screen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &960882785
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960882784}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1461014066}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &960882786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960882784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &960882787
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960882784}
-  m_CullTransparentMesh: 1
 --- !u!1 &1139269987
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,6 +2082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   characterData: {fileID: 11400000, guid: b0ed2f31c8aefc3418100cb8a6aa33ee, type: 2}
   weaponData: {fileID: 11400000, guid: 059e5bf8e3faf8f468695dfb4a740d2d, type: 2}
+  playerName: 
   currentMaxHealth: 0
   currentHealth: 0
   currentRecovery: 0
@@ -2177,8 +2104,6 @@ MonoBehaviour:
     endLevel: 9999
     experienceCapIncrease: 0
   invincibilityDuration: 0.5
-  weaponIndex: 0
-  passiveItemIndex: 0
 --- !u!114 &1139269998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2206,6 +2131,7 @@ MonoBehaviour:
   - {fileID: 824872374}
   - {fileID: 1707164791}
   - {fileID: 2106979439}
+  weaponIndex: 0
   passiveItemSlots:
   - {fileID: 0}
   - {fileID: 0}
@@ -2221,6 +2147,10 @@ MonoBehaviour:
   - {fileID: 876053813}
   - {fileID: 1987416191}
   - {fileID: 373689261}
+  passiveItemIndex: 0
+  WeaponUpgradeOptions: []
+  PassiveItemUpgradeOptions: []
+  UpgradeUIOptions: []
 --- !u!1 &1159142932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,7 +2635,6 @@ RectTransform:
   m_Children:
   - {fileID: 1587702266}
   - {fileID: 2054048605}
-  - {fileID: 960882785}
   - {fileID: 1159142933}
   m_Father: {fileID: 1327382752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

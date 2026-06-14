@@ -3,6 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterScriptableObject", menuName = "ScriptableObjects/Character")]
 public class CharacterScriptableObject : ScriptableObject
 {
+    [SerializeField] string playerName;
+    public string PlayerName { get => playerName; private set => playerName = value; }
+
     [SerializeField] GameObject startingWeapon;
     public GameObject StartingWeapon { get => startingWeapon; private set => startingWeapon = value; }
 

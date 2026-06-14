@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -8,13 +7,14 @@ public class PlayerStats : MonoBehaviour
     //Reference
     public static PlayerStats Instance;
 
-    public event Action PlayerDied;
+    public event Action<PlayerStats> PlayerDied;
     public event Action<PlayerStats> PlayerLeveledUp;
 
     public CharacterScriptableObject characterData;
     public WeaponScriptableObject weaponData;
 
     //Current Stats
+    [HideInInspector] public string playerName;
     [HideInInspector] public float currentMaxHealth;
     [HideInInspector] public float currentHealth;
     [HideInInspector] public float currentRecovery;
@@ -23,6 +23,21 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float currentMoveSpeed;
     [HideInInspector] public float currentVision;
 
+    public string PlayerName
+    {
+        get { return playerName; }
+        set
+        {
+            if (playerName == value)
+                return;
+
+            playerName = value;
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.playerNameDisplay.text = PlayerName;
+            }
+        }
+    }
 
     public float CurrentMaxHealth
     {
@@ -158,12 +173,6 @@ public class PlayerStats : MonoBehaviour
     float invincibilityTimer;
     bool isInvincible;
 
-
-    //Inventory
-    PlayerInventory inventory;
-    public int weaponIndex = 0;
-    public int passiveItemIndex = 0;
-
     void Awake()
     {
         Instance = this;
@@ -173,6 +182,7 @@ public class PlayerStats : MonoBehaviour
             weaponData = WeaponSelector.GetData();
         }
 
+        PlayerName = characterData.PlayerName;
         CurrentMaxHealth = characterData.MaxHealth;
         CurrentHealth = characterData.MaxHealth;
         CurrentRecovery = characterData.Recovery;
@@ -184,10 +194,9 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-        inventory = PlayerInventory.Instance;
         experienceCap = levelRanges[0].experienceCapIncrease;
-        SpawnWeapon(weaponData.Controller);
 
+        GameManager.Instance.playerNameDisplay.text = PlayerName;
         GameManager.Instance.currentMaxHealthDisplay.text = "Max Health: " + CurrentMaxHealth;
         GameManager.Instance.currentHealthDisplay.text = "Current Health: " + CurrentHealth;
         GameManager.Instance.currentRecoveryDisplay.text = "Recovery: " + CurrentRecovery;
@@ -257,7 +266,7 @@ public class PlayerStats : MonoBehaviour
 
     public void Kill()
     {
-        PlayerDied?.Invoke();
+        PlayerDied?.Invoke(this);
     }
 
     void Recover()
@@ -271,37 +280,5 @@ public class PlayerStats : MonoBehaviour
                 CurrentHealth = characterData.MaxHealth;
             }
         }
-    }
-
-    public void SpawnWeapon(GameObject weapon)
-    {
-        //Check if slots are full
-        if (weaponIndex > inventory.weaponSlots.Count - 1)
-        {
-            Debug.Log("Weapon inventory is full");
-            return;
-        }
-
-        GameObject spawnedWeapon = Instantiate(weapon, transform.position, quaternion.identity);
-        spawnedWeapon.transform.SetParent(transform);
-        inventory.AddWeapon(weaponIndex, spawnedWeapon.GetComponent<WeaponController>());
-
-        weaponIndex++;
-    }
-
-    public void SpawnPassiveItem(GameObject passiveItem)
-    {
-        //Check if slots are full
-        if (passiveItemIndex > inventory.passiveItemSlots.Count - 1)
-        {
-            Debug.Log("Weapon inventory is full");
-            return;
-        }
-
-        GameObject spawnedPassiveItem = Instantiate(passiveItem, transform.position, quaternion.identity);
-        spawnedPassiveItem.transform.SetParent(transform);
-        inventory.AddPassiveItem(passiveItemIndex, spawnedPassiveItem.GetComponent<PassiveItem>());
-
-        passiveItemIndex++;
     }
 }

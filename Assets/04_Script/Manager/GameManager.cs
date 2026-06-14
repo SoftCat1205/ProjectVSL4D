@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject ResultScreen;
 
     [Header("Current Stat Displays")]
+    public TextMeshProUGUI playerNameDisplay;
     public TextMeshProUGUI currentMaxHealthDisplay;
     public TextMeshProUGUI currentHealthDisplay;
     public TextMeshProUGUI currentRecoveryDisplay;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     private bool _isSettingScreenOpen = false;
     private bool _isStatusScreenOpen = false;
+    private bool _canUpgrade = false;
     private bool _isGameOver = false;
     private int _playersAlive;
 
@@ -87,6 +89,11 @@ public class GameManager : MonoBehaviour
         {
             _isStatusScreenOpen = !_isStatusScreenOpen;
             StatusScreen.SetActive(_isStatusScreenOpen);
+
+            if (_canUpgrade)
+            {
+
+            }
         }
     }
 
@@ -101,10 +108,10 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerLevelUp(PlayerStats playerStats)
     {
-
+        _canUpgrade = true;
     }
 
-    public void OnPlayerDeath()
+    public void OnPlayerDeath(PlayerStats playerStats)
     {
         _playersAlive--;
         Debug.Log("A Player Died");
