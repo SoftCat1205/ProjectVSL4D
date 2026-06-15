@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class WeaponBehaviour : MonoBehaviour
 {
-    public WeaponScriptableObject weaponData;
+    public WeaponScriptableObject WeaponData;
 
-    public float destoryAfterSeconds;
-    protected PlayerMovement pm;
-    protected PlayerStats ps;
+    public float DestoryAfterSeconds;
+    protected Player player;
 
     protected float currentDamage;
     protected float currentSpeed;
@@ -15,16 +14,15 @@ public class WeaponBehaviour : MonoBehaviour
 
     protected virtual void Awake()
     {
-        currentDamage = weaponData.Damage;
-        currentSpeed = weaponData.Speed;
-        currentCooldownDuration = weaponData.CooldownDuration;
+        currentDamage = WeaponData.Damage;
+        currentSpeed = WeaponData.Speed;
+        currentCooldownDuration = WeaponData.CooldownDuration;
     }
 
     protected virtual void Start()
     {
-        pm = PlayerMovement.Instance;
-        ps = PlayerStats.Instance;
-        Destroy(gameObject, destoryAfterSeconds);
+
+        Destroy(gameObject, DestoryAfterSeconds);
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D col)

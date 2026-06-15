@@ -4,7 +4,7 @@ public class SpinachPassiveItem : PassiveItem
 {
     protected override void ApplyModifier()
     {
-        ps.CurrentAbilityHaste *= 1 + passiveItemData.Multiplier;
-        ps.CurrentAbilityHaste *= 1 + passiveItemData.Additive;
+        player.Stats.CurrentAbilityHaste *= 1 + PassiveItemData.Multiplier;
+        player.Stats.CurrentAbilityHaste *= 1 + PassiveItemData.Additive;
     }
 }

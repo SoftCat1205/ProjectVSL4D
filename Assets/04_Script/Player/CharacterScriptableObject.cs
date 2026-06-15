@@ -3,27 +3,27 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterScriptableObject", menuName = "ScriptableObjects/Character")]
 public class CharacterScriptableObject : ScriptableObject
 {
-    [SerializeField] string playerName;
+    [SerializeField] private string playerName;
     public string PlayerName { get => playerName; private set => playerName = value; }
 
-    [SerializeField] GameObject startingWeapon;
+    [SerializeField] private GameObject startingWeapon;
     public GameObject StartingWeapon { get => startingWeapon; private set => startingWeapon = value; }
 
-    [SerializeField] float maxHealth;
+    [SerializeField] private float maxHealth;
     public float MaxHealth { get => maxHealth; private set => maxHealth = value; }
 
-    [SerializeField] float recovery;
+    [SerializeField] private float recovery;
     public float Recovery { get => recovery; private set => recovery = value; }
 
-    [SerializeField] float armour;
+    [SerializeField] private float armour;
     public float Armour { get => armour; private set => armour = value; }
 
-    [SerializeField] float moveSpeed;
+    [SerializeField] private float moveSpeed;
     public float MoveSpeed { get => moveSpeed; private set => moveSpeed = value; }
 
-    [SerializeField] float abilityHaste;
+    [SerializeField] private float abilityHaste;
     public float AbilityHaste { get => abilityHaste; private set => abilityHaste = value; }
 
-    [SerializeField] float vision;
+    [SerializeField] private float vision;
     public float Vision { get => vision; private set => vision = value; }
 }

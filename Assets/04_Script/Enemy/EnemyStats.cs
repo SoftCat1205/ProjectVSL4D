@@ -2,35 +2,58 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    PlayerStats ps;
-    EnemySpawner es;
+    private EnemySpawner es;
     public EnemyScriptableObject enemyData;
 
-    [HideInInspector] public float currentMoveSpeed;
-    [HideInInspector] public float currentHealth;
-    [HideInInspector] public float currentDamage;
+    [SerializeField] public float currentMoveSpeed;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float currentDamage;
+    [SerializeField] private Player currentTarget;
 
-    [HideInInspector] public float despawnDistance = 20f;
+    [SerializeField] private float despawnDistance = 20f;
+    [SerializeField] private float shortestDistance;
 
-    void Awake()
+    private void Awake()
     {
         currentMoveSpeed = enemyData.MoveSpeed;
         currentHealth = enemyData.MaxHealth;
         currentDamage = enemyData.Damage;
     }
 
-    void Start()
+    private void Start()
     {
-        ps = PlayerStats.Instance;
         es = EnemySpawner.Instance;
     }
 
-    void Update()
+    private void Update()
     {
-        if (Vector2.Distance(transform.position, ps.transform.position) >= despawnDistance)
+        FindClosestPlayer();
+        if (shortestDistance >= despawnDistance)
         {
             RespawnEnemy();
         }
+    }
+
+    private void FindClosestPlayer()
+    {
+        float shortestDistance = Mathf.Infinity;
+        Player closestPlayer = null;
+
+        foreach (Player player in PlayerManager.Instance.Players)
+        {
+            if (!player.Stats.IsAlive)
+                continue;
+
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                closestPlayer = player;
+            }
+        }
+
+        currentTarget = closestPlayer;
     }
 
     public void TakeDamage(float dmg)
@@ -46,18 +69,17 @@ public class EnemyStats : MonoBehaviour
     public void Kill()
     {
         Destroy(gameObject);
-        ps.IncreaseExperience(enemyData.ExperienceDrop);
     }
 
-    void OnCollisionStay2D(Collision2D col)
+    private void OnTriggerEnter(Collider other)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (other.TryGetComponent(out Player player))
         {
-            ps.TakeDamage(currentDamage);
+            player.Stats.TakeDamage(currentDamage);
         }
     }
 
-    void RespawnEnemy()
+    private void RespawnEnemy()
     {
         transform.position = es.GetSpawnPosition();
     }

@@ -5,26 +5,26 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public PlayerStats ps;
+    public Player player;
     public static EnemySpawner Instance;
 
     [System.Serializable]
     public class Wave
     {
-        public string waveName;
-        public List<EnemyGroup> enemyGroups;
-        public int waveQuota;       //Total number of enemies in the wave
-        public float spawnInterval;
-        public int spawnCount;      // Current number of enemies spawned
+        public string WaveName;
+        public List<EnemyGroup> EnemyGroups;
+        public int WaveQuota;       //Total number of enemies in the wave
+        public float SpawnInterval;
+        public int SpawnCount;      // Current number of enemies spawned
     }
 
     [System.Serializable]
     public class EnemyGroup
     {
-        public string enemyName;
-        public int enemyCount;  //Total number of enemies in the group
-        public int spawnCount;  //Current number of enemies spawned included in the group;
-        public GameObject enemyPrefab;
+        public string EnemyName;
+        public int EnemyCount;  //Total number of enemies in the group
+        public int SpawnCount;  //Current number of enemies spawned included in the group;
+        public GameObject EnemyPrefab;
     }
 
     public List<Wave> waves;
@@ -41,20 +41,19 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        ps = PlayerStats.Instance;
         CalculateEnemyQuota();
     }
 
     void FixedUpdate()
     {
-        if (currentWave < waves.Count - 1 && waves[currentWave].spawnCount == 0)
+        if (currentWave < waves.Count - 1 && waves[currentWave].SpawnCount == 0)
         {
             StartCoroutine(BeginNewWave());
         }
 
         spawnTimer += Time.deltaTime;
 
-        if (spawnTimer > waves[currentWave].spawnInterval)
+        if (spawnTimer > waves[currentWave].SpawnInterval)
         {
             spawnTimer = 0f;
             SpawnEnemies();
@@ -75,12 +74,12 @@ public class EnemySpawner : MonoBehaviour
     void CalculateEnemyQuota()
     {
         int currentWaveQuota = 0;
-        foreach (var enemyGroup in waves[currentWave].enemyGroups)
+        foreach (var enemyGroup in waves[currentWave].EnemyGroups)
         {
-            currentWaveQuota += enemyGroup.enemyCount;
+            currentWaveQuota += enemyGroup.EnemyCount;
         }
 
-        waves[currentWave].waveQuota = currentWaveQuota;
+        waves[currentWave].WaveQuota = currentWaveQuota;
     }
 
     public Vector2 GetSpawnPosition()
@@ -103,16 +102,16 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemies()
     {
-        if (waves[currentWave].spawnCount < waves[currentWave].waveQuota)
+        if (waves[currentWave].SpawnCount < waves[currentWave].WaveQuota)
         {
-            foreach (var enemyGroup in waves[currentWave].enemyGroups)
+            foreach (var enemyGroup in waves[currentWave].EnemyGroups)
             {
-                if (enemyGroup.spawnCount < enemyGroup.enemyCount)
+                if (enemyGroup.SpawnCount < enemyGroup.EnemyCount)
                 {
-                    Instantiate(enemyGroup.enemyPrefab, GetSpawnPosition(), quaternion.identity);
+                    Instantiate(enemyGroup.EnemyPrefab, GetSpawnPosition(), quaternion.identity);
 
-                    enemyGroup.spawnCount++;
-                    waves[currentWave].spawnCount++;
+                    enemyGroup.SpawnCount++;
+                    waves[currentWave].SpawnCount++;
                 }
             }
         }

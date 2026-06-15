@@ -4,150 +4,137 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    //Reference
-    public static PlayerStats Instance;
 
+    public CharacterScriptableObject CharacterData;
+    public WeaponScriptableObject WeaponData;
+
+    //Events
     public event Action<PlayerStats> PlayerDied;
-    public event Action<PlayerStats> PlayerLeveledUp;
+    public event Action<PlayerStats> PlayerLevelUp;
+    public event Action<PlayerStats> StatUpdate;
 
-    public CharacterScriptableObject characterData;
-    public WeaponScriptableObject weaponData;
+    //Player Data
+    public bool IsAlive { get; private set; }
 
     //Current Stats
-    [HideInInspector] public string playerName;
-    [HideInInspector] public float currentMaxHealth;
-    [HideInInspector] public float currentHealth;
-    [HideInInspector] public float currentRecovery;
-    [HideInInspector] public float currentArmour;
-    [HideInInspector] public float currentAbilityHaste;
-    [HideInInspector] public float currentMoveSpeed;
-    [HideInInspector] public float currentVision;
+    private string _playerName;
+    private float _currentMaxHealth;
+    private float _currentHealth;
+    private float _currentRecovery;
+    private float _currentArmour;
+    private float _currentAbilityHaste;
+    private float _currentMoveSpeed;
+    private float _currentVision;
 
     public string PlayerName
     {
-        get { return playerName; }
+        get { return _playerName; }
         set
         {
-            if (playerName == value)
+            if (_playerName == value)
                 return;
 
-            playerName = value;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.playerNameDisplay.text = PlayerName;
-            }
+            _playerName = value;
+
+            StatUpdate?.Invoke(this);
         }
     }
 
     public float CurrentMaxHealth
     {
-        get { return currentMaxHealth; }
+        get { return _currentMaxHealth; }
         set
         {
-            if (currentMaxHealth == value)
+            if (_currentMaxHealth == value)
                 return;
 
-            currentMaxHealth = value;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.currentRecoveryDisplay.text = "Max Health: " + CurrentMaxHealth;
-            }
+            _currentMaxHealth = value;
+
+            StatUpdate?.Invoke(this);
         }
     }
 
     public float CurrentHealth
     {
-        get { return currentHealth; }
+        get { return _currentHealth; }
         set
         {
-            if (currentHealth == value)
+            if (_currentHealth == value)
                 return;
 
-            currentHealth = value;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.currentHealthDisplay.text = "Current Health: " + CurrentHealth;
-            }
+            _currentHealth = value;
+
+            StatUpdate?.Invoke(this);
         }
     }
 
     public float CurrentRecovery
     {
-        get { return currentRecovery; }
+        get { return _currentRecovery; }
         set
         {
-            if (currentHealth == value)
+            if (_currentHealth == value)
                 return;
 
-            currentRecovery = value;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.currentRecoveryDisplay.text = "Recovery: " + CurrentRecovery;
-            }
+            _currentRecovery = value;
+
+            StatUpdate?.Invoke(this);
         }
     }
 
     public float CurrentArmour
     {
-        get { return currentArmour; }
+        get { return _currentArmour; }
         set
         {
-            if (currentHealth == value)
+            if (_currentHealth == value)
                 return;
 
-            currentArmour = value;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.currentArmourDisplay.text = "Armour: " + CurrentArmour;
-            }
+            _currentArmour = value;
+
+            StatUpdate?.Invoke(this);
         }
     }
 
     public float CurrentAbilityHaste
     {
-        get { return currentAbilityHaste; }
+        get { return _currentAbilityHaste; }
         set
         {
-            if (currentHealth == value)
+            if (_currentHealth == value)
                 return;
 
-            currentAbilityHaste = value;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.currentAbilityHasteDisplay.text = "Ability Haste: " + CurrentAbilityHaste;
-            }
+            _currentAbilityHaste = value;
+
+            StatUpdate?.Invoke(this);
         }
     }
 
     public float CurrentMoveSpeed
     {
-        get { return currentMoveSpeed; }
+        get { return _currentMoveSpeed; }
         set
         {
-            if (currentHealth == value)
+            if (_currentHealth == value)
                 return;
 
-            currentMoveSpeed = value;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.currentMoveSpeedDisplay.text = "Move Speed: " + CurrentMoveSpeed;
-            }
+            _currentMoveSpeed = value;
+
+            StatUpdate?.Invoke(this);
         }
     }
 
     public float CurrentVision
     {
-        get { return currentVision; }
+        get { return _currentVision; }
         set
         {
-            if (currentHealth == value)
+            if (_currentHealth == value)
                 return;
 
-            currentVision = value;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.currentVisionDisplay.text = "Vision: " + CurrentVision;
-            }
+            _currentVision = value;
+
+            StatUpdate?.Invoke(this);
         }
     }
 
@@ -175,35 +162,19 @@ public class PlayerStats : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        IsAlive = true;
 
         if (WeaponSelector.Instance != null)
         {
-            weaponData = WeaponSelector.GetData();
+            WeaponData = WeaponSelector.GetData();
         }
 
-        PlayerName = characterData.PlayerName;
-        CurrentMaxHealth = characterData.MaxHealth;
-        CurrentHealth = characterData.MaxHealth;
-        CurrentRecovery = characterData.Recovery;
-        CurrentArmour = characterData.Armour;
-        CurrentAbilityHaste = characterData.AbilityHaste;
-        CurrentMoveSpeed = characterData.MoveSpeed;
-        CurrentVision = characterData.Vision;
+        StatUpdate?.Invoke(this);
     }
 
     void Start()
     {
         experienceCap = levelRanges[0].experienceCapIncrease;
-
-        GameManager.Instance.playerNameDisplay.text = PlayerName;
-        GameManager.Instance.currentMaxHealthDisplay.text = "Max Health: " + CurrentMaxHealth;
-        GameManager.Instance.currentHealthDisplay.text = "Current Health: " + CurrentHealth;
-        GameManager.Instance.currentRecoveryDisplay.text = "Recovery: " + CurrentRecovery;
-        GameManager.Instance.currentArmourDisplay.text = "Armour: " + CurrentArmour;
-        GameManager.Instance.currentAbilityHasteDisplay.text = "Ability Haste: " + CurrentAbilityHaste;
-        GameManager.Instance.currentMoveSpeedDisplay.text = "Move Speed: " + CurrentMoveSpeed;
-        GameManager.Instance.currentVisionDisplay.text = "Vision: " + CurrentVision;
     }
 
     void FixedUpdate()
@@ -216,7 +187,7 @@ public class PlayerStats : MonoBehaviour
         {
             isInvincible = false;
         }
-        Recover();
+        Recover(1);
     }
 
     public void IncreaseExperience(int amount)
@@ -231,7 +202,7 @@ public class PlayerStats : MonoBehaviour
         if (experience >= experienceCap)
         {
             level++;
-            PlayerLeveledUp?.Invoke(this);
+            PlayerLevelUp?.Invoke(this);
             experience -= experienceCap;
 
             int experienceCapIncrease = 0;
@@ -259,25 +230,26 @@ public class PlayerStats : MonoBehaviour
 
             if (CurrentHealth <= 0f)
             {
-                Kill();
+                Die();
             }
         }
     }
 
-    public void Kill()
+    public void Die()
     {
+        IsAlive = false;
         PlayerDied?.Invoke(this);
     }
 
-    void Recover()
+    void Recover(float heal)
     {
-        if (CurrentHealth < characterData.MaxHealth)
+        if (CurrentHealth < CharacterData.MaxHealth)
         {
             CurrentHealth += CurrentRecovery * Time.deltaTime;
 
-            if (CurrentHealth > characterData.MaxHealth)
+            if (CurrentHealth > CharacterData.MaxHealth)
             {
-                CurrentHealth = characterData.MaxHealth;
+                CurrentHealth = CharacterData.MaxHealth;
             }
         }
     }

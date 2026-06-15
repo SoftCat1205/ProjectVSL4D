@@ -1820,18 +1820,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1899e0ade8bb4bdd858271ce212b3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  SettingScreen: {fileID: 1587702263}
-  StatusScreen: {fileID: 2054048604}
   ResultScreen: {fileID: 1159142932}
-  playerNameDisplay: {fileID: 0}
-  currentMaxHealthDisplay: {fileID: 1421690884}
-  currentHealthDisplay: {fileID: 1886894383}
-  currentRecoveryDisplay: {fileID: 871018476}
-  currentArmourDisplay: {fileID: 1731251914}
-  currentAbilityHasteDisplay: {fileID: 145325798}
-  currentMoveSpeedDisplay: {fileID: 1441525522}
-  currentVisionDisplay: {fileID: 1859603257}
-  StopWatchDisplay: {fileID: 1985417146}
+  IsGameOver: 0
 --- !u!114 &921555691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1869,6 +1859,7 @@ GameObject:
   - component: {fileID: 1139269989}
   - component: {fileID: 1139269993}
   - component: {fileID: 1139269995}
+  - component: {fileID: 1139269999}
   - component: {fileID: 1139269992}
   - component: {fileID: 1139269996}
   - component: {fileID: 1139269997}
@@ -2080,16 +2071,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df755c7c11686a44894ff2a048e9221a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  characterData: {fileID: 11400000, guid: b0ed2f31c8aefc3418100cb8a6aa33ee, type: 2}
-  weaponData: {fileID: 11400000, guid: 059e5bf8e3faf8f468695dfb4a740d2d, type: 2}
-  playerName: 
-  currentMaxHealth: 0
-  currentHealth: 0
-  currentRecovery: 0
-  currentArmour: 0
-  currentAbilityHaste: 0
-  currentMoveSpeed: 0
-  currentVision: 0
+  CharacterData: {fileID: 0}
+  WeaponData: {fileID: 0}
   experience: 0
   level: 1
   experienceCap: 50
@@ -2121,16 +2104,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  weaponLevels: 000000000000000000000000000000000000000000000000
+  weaponLevels: 00000000000000000000000000000000
   weaponUISlots:
   - {fileID: 1726322745}
   - {fileID: 157845381}
   - {fileID: 1527526933}
   - {fileID: 824872374}
-  - {fileID: 1707164791}
-  - {fileID: 2106979439}
   weaponIndex: 0
   passiveItemSlots:
   - {fileID: 0}
@@ -2151,6 +2130,18 @@ MonoBehaviour:
   WeaponUpgradeOptions: []
   PassiveItemUpgradeOptions: []
   UpgradeUIOptions: []
+--- !u!114 &1139269999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139269987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14de5ee46436c9e43b968c0a788d1629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!1 &1159142932
 GameObject:
   m_ObjectHideFlags: 0
@@ -4170,21 +4161,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12cc71f6123d2a149bb3dd399c43295f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  ps: {fileID: 0}
+  player: {fileID: 0}
   waves:
-  - waveName: Wave1
-    enemyGroups:
-    - enemyName: Bat
-      enemyCount: 3
-      spawnCount: 0
-      enemyPrefab: {fileID: 2426143171147244075, guid: 7d4a0f7c9060ff249be828af6d3acdb0, type: 3}
-    - enemyName: RedBat
-      enemyCount: 2
-      spawnCount: 0
-      enemyPrefab: {fileID: 2426143171147244075, guid: 36b43fcae26c79b44812ff1165586ed7, type: 3}
-    waveQuota: 0
-    spawnInterval: 3
-    spawnCount: 0
+  - WaveName: 
+    EnemyGroups: []
+    WaveQuota: 0
+    SpawnInterval: 0
+    SpawnCount: 0
   currentWave: 0
   waveInterval: 0
 --- !u!4 &2007749701

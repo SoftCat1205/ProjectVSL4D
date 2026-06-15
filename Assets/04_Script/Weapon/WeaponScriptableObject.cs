@@ -4,33 +4,33 @@ using UnityEngine;
 public class WeaponScriptableObject : ScriptableObject
 {
     [Header("Weapon Stats")]
-    [SerializeField] GameObject controller;
+    [SerializeField] private GameObject controller;
     public GameObject Controller { get => controller; private set => controller = value; }
 
-    [SerializeField] GameObject prefab;
+    [SerializeField] private GameObject prefab;
     public GameObject Prefab { get => prefab; private set => prefab = value; }
 
-    [SerializeField] float damage;
+    [SerializeField] private float damage;
     public float Damage { get => damage; private set => damage = value; }
 
-    [SerializeField] float speed;
+    [SerializeField] private float speed;
     public float Speed { get => speed; private set => speed = value; }
 
-    [SerializeField] float cooldownDuration;
+    [SerializeField] private float cooldownDuration;
     public float CooldownDuration { get => cooldownDuration; private set => cooldownDuration = value; }
 
-    [SerializeField] int level;
+    [SerializeField] private int level;
     public int Level { get => level; private set => level = value; }
 
-    [SerializeField] GameObject nextLevelPrefab;
+    [SerializeField] private GameObject nextLevelPrefab;
     public GameObject NextLevelPrefab { get => nextLevelPrefab; private set => nextLevelPrefab = value; }
 
-    [SerializeField] string displayName;
+    [SerializeField] private string displayName;
     public string DisplayName { get => displayName; private set => displayName = value; }
 
-    [SerializeField] string discription;
+    [SerializeField] private string discription;
     public string Discription { get => discription; private set => discription = value; }
 
-    [SerializeField] Sprite icon;
+    [SerializeField] private Sprite icon;
     public Sprite Icon { get => icon; private set => icon = value; }
 }

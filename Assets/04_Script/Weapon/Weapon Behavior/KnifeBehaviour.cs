@@ -8,7 +8,7 @@ public class KnifeBehaviour : ProjectileWeaponBehaviour
     protected override void Start()
     {
         base.Start();
-        dir = pm.lastDir.normalized;
+        dir = player.Movement.lastDir.normalized;
     }
 
     // Update is called once per frame

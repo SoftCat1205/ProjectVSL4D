@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PassiveItem : MonoBehaviour
 {
-    protected PlayerStats ps;
-    public PassiveItemScriptableObject passiveItemData;
+    public PassiveItemScriptableObject PassiveItemData;
+    public Player player;
 
     protected virtual void ApplyModifier()
     {
@@ -12,7 +12,6 @@ public class PassiveItem : MonoBehaviour
 
     void Start()
     {
-        ps = PlayerStats.Instance;
         ApplyModifier();
     }
 }
