@@ -15,6 +15,8 @@ public class RunManager : MonoBehaviour
 
     private void Awake()
     {
+        GameHub.Register(this);
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

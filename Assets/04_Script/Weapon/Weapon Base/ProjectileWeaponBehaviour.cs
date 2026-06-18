@@ -7,7 +7,6 @@ public class ProjectileWeaponBehaviour : WeaponBehaviour
     {
         currentDamage = WeaponData.Damage;
         currentSpeed = WeaponData.Speed;
-        currentCooldownDuration = WeaponData.CooldownDuration;
     }
 
     public void DirectionChecker()

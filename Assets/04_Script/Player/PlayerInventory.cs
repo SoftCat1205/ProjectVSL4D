@@ -12,10 +12,10 @@ public class PlayerInventory : MonoBehaviour
     public List<Image> weaponUISlots = new(4);
     public int weaponIndex = 0;
 
-    public List<PassiveItem> passiveItemSlots = new(6);
-    public int[] passiveItemLevels = new int[6];
-    public List<Image> passiveItemUISlots = new(6);
-    public int passiveItemIndex = 0;
+    public List<Equipment> EquipmentSlots = new(6);
+    public int[] EquipmentLevels = new int[6];
+    public List<Image> EquipmentUISlots = new(6);
+    public int EquipmentIndex = 0;
 
     [System.Serializable]
     public class WeaponUpgrade
@@ -25,10 +25,10 @@ public class PlayerInventory : MonoBehaviour
     }
 
     [System.Serializable]
-    public class PassiveItemUpgrade
+    public class EquipmentUpgrade
     {
-        public GameObject InitialPassiveItem;
-        public PassiveItemScriptableObject PassiveItemData;
+        public GameObject InitialEquipment;
+        public EquipmentScriptableObject EquipmentData;
     }
 
     [System.Serializable]
@@ -41,17 +41,12 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public List<WeaponUpgrade> WeaponUpgradeOptions = new();
-    public List<PassiveItemUpgrade> PassiveItemUpgradeOptions = new();
+    public List<EquipmentUpgrade> EquipmentUpgradeOptions = new();
     public List<UpgradeUI> UpgradeUIOptions = new();
 
     void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
-
     }
 
     public void SpawnWeapon(GameObject weapon)
@@ -70,20 +65,20 @@ public class PlayerInventory : MonoBehaviour
         weaponIndex++;
     }
 
-    public void SpawnPassiveItem(GameObject passiveItem)
+    public void SpawnEquipment(GameObject Equipment)
     {
         //Check if slots are full
-        if (passiveItemIndex > passiveItemSlots.Count - 1)
+        if (EquipmentIndex > EquipmentSlots.Count - 1)
         {
             Debug.Log("Weapon inventory is full");
             return;
         }
 
-        GameObject spawnedPassiveItem = Instantiate(passiveItem, transform.position, quaternion.identity);
-        spawnedPassiveItem.transform.SetParent(transform);
-        AddPassiveItem(passiveItemIndex, spawnedPassiveItem.GetComponent<PassiveItem>());
+        GameObject spawnedEquipment = Instantiate(Equipment, transform.position, quaternion.identity);
+        spawnedEquipment.transform.SetParent(transform);
+        AddEquipment(EquipmentIndex, spawnedEquipment.GetComponent<Equipment>());
 
-        passiveItemIndex++;
+        EquipmentIndex++;
     }
 
     public void AddWeapon(int slotIndex, WeaponController weapon)
@@ -91,15 +86,15 @@ public class PlayerInventory : MonoBehaviour
         weaponSlots[slotIndex] = weapon;
         weaponLevels[slotIndex] = weapon.weaponData.Level;
         weaponUISlots[slotIndex].enabled = true;
-        weaponUISlots[slotIndex].sprite = weapon.weaponData.Icon;
+        weaponUISlots[slotIndex].sprite = weapon.weaponData.WeaponFamily.Icon;
     }
 
-    public void AddPassiveItem(int slotIndex, PassiveItem passiveItem)
+    public void AddEquipment(int slotIndex, Equipment Equipment)
     {
-        passiveItemSlots[slotIndex] = passiveItem;
-        passiveItemLevels[slotIndex] = passiveItem.PassiveItemData.Level;
-        passiveItemUISlots[slotIndex].enabled = true;
-        passiveItemUISlots[slotIndex].sprite = passiveItem.PassiveItemData.Icon;
+        EquipmentSlots[slotIndex] = Equipment;
+        EquipmentLevels[slotIndex] = Equipment.EquipmentData.Level;
+        EquipmentUISlots[slotIndex].enabled = true;
+        EquipmentUISlots[slotIndex].sprite = Equipment.EquipmentData.Icon;
     }
 
     public void LevelUpWeapon(int slotIndex)
@@ -121,23 +116,23 @@ public class PlayerInventory : MonoBehaviour
         weaponLevels[slotIndex] = upgradedWeapon.GetComponent<WeaponController>().weaponData.Level;
     }
 
-    public void LevelUpPassiveItem(int slotIndex)
+    public void LevelUpEquipment(int slotIndex)
     {
-        if (slotIndex > passiveItemSlots.Count)
+        if (slotIndex > EquipmentSlots.Count)
         {
             return;
         }
-        PassiveItem passiveItem = passiveItemSlots[slotIndex];
-        if (passiveItem.PassiveItemData.NextLevelPrefab == null)
+        Equipment Equipment = EquipmentSlots[slotIndex];
+        if (Equipment.EquipmentData.NextLevelPrefab == null)
         {
             Debug.Log("NO NEXT LEVEL PASSIVE ITEM PREFAB");
             return;
         }
-        GameObject upgradedPassiveItem = Instantiate(passiveItem.PassiveItemData.NextLevelPrefab, transform.position, Quaternion.identity);
-        upgradedPassiveItem.transform.SetParent(transform);
-        AddPassiveItem(slotIndex, upgradedPassiveItem.GetComponent<PassiveItem>());
-        Destroy(passiveItem.gameObject);
-        passiveItemLevels[slotIndex] = upgradedPassiveItem.GetComponent<PassiveItem>().PassiveItemData.Level;
+        GameObject upgradedEquipment = Instantiate(Equipment.EquipmentData.NextLevelPrefab, transform.position, Quaternion.identity);
+        upgradedEquipment.transform.SetParent(transform);
+        AddEquipment(slotIndex, upgradedEquipment.GetComponent<Equipment>());
+        Destroy(Equipment.gameObject);
+        EquipmentLevels[slotIndex] = upgradedEquipment.GetComponent<Equipment>().EquipmentData.Level;
     }
 
     private void ApplyUpgradeOptions()
@@ -162,30 +157,30 @@ public class PlayerInventory : MonoBehaviour
                         break;
                     }
                 }
-                upgradeOption.UpgradeDisplayNameDisplay.text = weaponUpgrade.WeaponData.DisplayName;
-                upgradeOption.UpgradeDiscriptionDisplay.text = weaponUpgrade.WeaponData.Discription;
-                upgradeOption.UpgradeIcon.sprite = weaponUpgrade.WeaponData.Icon;
+                upgradeOption.UpgradeDisplayNameDisplay.text = weaponUpgrade.WeaponData.WeaponFamily.DisplayName;
+                upgradeOption.UpgradeDiscriptionDisplay.text = weaponUpgrade.WeaponData.WeaponFamily.Discription;
+                upgradeOption.UpgradeIcon.sprite = weaponUpgrade.WeaponData.WeaponFamily.Icon;
             }
             else if (upgradeType == 2)
             {
-                PassiveItemUpgrade passiveItemUpgrade = PassiveItemUpgradeOptions[UnityEngine.Random.Range(0, PassiveItemUpgradeOptions.Count)];
+                EquipmentUpgrade EquipmentUpgrade = EquipmentUpgradeOptions[UnityEngine.Random.Range(0, EquipmentUpgradeOptions.Count)];
 
-                if (passiveItemUpgrade == null)
+                if (EquipmentUpgrade == null)
                 {
                     return;
                 }
 
-                for (int i = 0; i < passiveItemSlots.Count; i++)
+                for (int i = 0; i < EquipmentSlots.Count; i++)
                 {
-                    if (passiveItemSlots[i] != null && passiveItemSlots[i] == passiveItemUpgrade.PassiveItemData)
+                    if (EquipmentSlots[i] != null && EquipmentSlots[i] == EquipmentUpgrade.EquipmentData)
                     {
-                        upgradeOption.UpgradeButton.onClick.AddListener(() => LevelUpPassiveItem(i));
+                        upgradeOption.UpgradeButton.onClick.AddListener(() => LevelUpEquipment(i));
                         break;
                     }
                 }
-                upgradeOption.UpgradeDisplayNameDisplay.text = passiveItemUpgrade.PassiveItemData.DisplayName;
-                upgradeOption.UpgradeDiscriptionDisplay.text = passiveItemUpgrade.PassiveItemData.Discription;
-                upgradeOption.UpgradeIcon.sprite = passiveItemUpgrade.PassiveItemData.Icon;
+                upgradeOption.UpgradeDisplayNameDisplay.text = EquipmentUpgrade.EquipmentData.DisplayName;
+                upgradeOption.UpgradeDiscriptionDisplay.text = EquipmentUpgrade.EquipmentData.Discription;
+                upgradeOption.UpgradeIcon.sprite = EquipmentUpgrade.EquipmentData.Icon;
             }
         }
     }

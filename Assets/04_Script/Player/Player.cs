@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerStats))]
 [RequireComponent(typeof(PlayerInventory))]
 [RequireComponent(typeof(PlayerStatistics))]
+
+[RequireComponent(typeof(PlayerWeaponManager))]
+[RequireComponent(typeof(HUDController))]
 public class Player : MonoBehaviour
 {
     public int PlayerID { get; private set; }
@@ -14,16 +17,24 @@ public class Player : MonoBehaviour
     public PlayerStats Stats { get; private set; }
     public PlayerInventory Inventory { get; private set; }
     public PlayerStatistics Statistics { get; private set; }
+    public HUDController HUD { get; private set; }
+    //Temp
+    public PlayerWeaponManager WeaponManager { get; private set; }
 
     private void Awake()
     {
-        PlayerManager.Instance.RegisterPlayer(this);
-
         Movement = GetComponent<PlayerMovement>();
         Animator = GetComponent<PlayerAnimator>();
         Stats = GetComponent<PlayerStats>();
         Inventory = GetComponent<PlayerInventory>();
         Statistics = GetComponent<PlayerStatistics>();
+        WeaponManager = GetComponent<PlayerWeaponManager>();
+        HUD = GetComponent<HUDController>();
+    }
+
+    private void Start()
+    {
+        PlayerManager.Instance.RegisterPlayer(this);
     }
 
     private void OnDestroy()

@@ -6,7 +6,7 @@ public class PlayerStats : MonoBehaviour
 {
 
     public CharacterScriptableObject CharacterData;
-    public WeaponScriptableObject WeaponData;
+    public WeaponScriptableObject StartWeaponData;
 
     //Events
     public event Action<PlayerStats> PlayerDied;
@@ -73,7 +73,7 @@ public class PlayerStats : MonoBehaviour
         get { return _currentRecovery; }
         set
         {
-            if (_currentHealth == value)
+            if (_currentRecovery == value)
                 return;
 
             _currentRecovery = value;
@@ -87,7 +87,7 @@ public class PlayerStats : MonoBehaviour
         get { return _currentArmour; }
         set
         {
-            if (_currentHealth == value)
+            if (_currentArmour == value)
                 return;
 
             _currentArmour = value;
@@ -101,7 +101,7 @@ public class PlayerStats : MonoBehaviour
         get { return _currentAbilityHaste; }
         set
         {
-            if (_currentHealth == value)
+            if (_currentAbilityHaste == value)
                 return;
 
             _currentAbilityHaste = value;
@@ -115,7 +115,7 @@ public class PlayerStats : MonoBehaviour
         get { return _currentMoveSpeed; }
         set
         {
-            if (_currentHealth == value)
+            if (_currentMoveSpeed == value)
                 return;
 
             _currentMoveSpeed = value;
@@ -129,7 +129,7 @@ public class PlayerStats : MonoBehaviour
         get { return _currentVision; }
         set
         {
-            if (_currentHealth == value)
+            if (_currentVision == value)
                 return;
 
             _currentVision = value;
@@ -166,10 +166,19 @@ public class PlayerStats : MonoBehaviour
 
         if (WeaponSelector.Instance != null)
         {
-            WeaponData = WeaponSelector.GetData();
+            StartWeaponData = WeaponSelector.GetData();
         }
 
         StatUpdate?.Invoke(this);
+
+        PlayerName = CharacterData.PlayerName;
+        CurrentMaxHealth = CharacterData.MaxHealth;
+        CurrentHealth = CharacterData.MaxHealth;
+        CurrentRecovery = CharacterData.Recovery;
+        CurrentArmour = CharacterData.Armour;
+        CurrentAbilityHaste = CharacterData.AbilityHaste;
+        CurrentMoveSpeed = CharacterData.MoveSpeed;
+        CurrentVision = CharacterData.Vision;
     }
 
     void Start()
@@ -243,14 +252,16 @@ public class PlayerStats : MonoBehaviour
 
     void Recover(float heal)
     {
-        if (CurrentHealth < CharacterData.MaxHealth)
+        if (CurrentHealth >= CurrentMaxHealth)
         {
-            CurrentHealth += CurrentRecovery * Time.deltaTime;
+            return;
+        }
 
-            if (CurrentHealth > CharacterData.MaxHealth)
-            {
-                CurrentHealth = CharacterData.MaxHealth;
-            }
+        CurrentHealth += heal;
+
+        if (CurrentHealth > CurrentMaxHealth)
+        {
+            CurrentHealth = CurrentMaxHealth;
         }
     }
 }

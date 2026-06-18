@@ -1,34 +1,20 @@
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+public abstract class WeaponController : MonoBehaviour
 {
     [Header("Weapon Stats")]
     public WeaponScriptableObject weaponData;
 
-    protected PlayerMovement pm;
-    private float currentCooldown;
+    protected float _currentCooldown = 1f;
 
-    void Awake()
+    private void FixedUpdate()
     {
-        pm = PlayerMovement.Instance;
-    }
-
-    protected virtual void Start()
-    {
-        currentCooldown = weaponData.CooldownDuration;
-    }
-
-    protected virtual void FixedUpdate()
-    {
-        currentCooldown -= Time.deltaTime;
-        if (currentCooldown <= 0f)
+        _currentCooldown -= Time.deltaTime;
+        if (_currentCooldown <= 0f)
         {
             Attack();
         }
     }
 
-    protected virtual void Attack()
-    {
-        currentCooldown = weaponData.CooldownDuration;
-    }
+    protected abstract void Attack();
 }

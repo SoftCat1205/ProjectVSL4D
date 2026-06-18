@@ -1,12 +1,12 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class ResultScreenController : MonoBehaviour
 {
     //Reference
-    public GameObject ResultScreen;
-
-    //Events
+    [SerializeField] private GameObject ResultScreen;
+    [SerializeField] private TextMeshProUGUI Reason;
 
     //Result Info
 
@@ -15,12 +15,28 @@ public class ResultScreenController : MonoBehaviour
     {
         Hide();
     }
-    public void Show()
-    {
 
+    private void OnEnable()
+    {
+        GameManager.Instance.GameEnded += OnGameEnd;
     }
 
-    public void Hide()
+    private void OnDisable()
+    {
+        GameManager.Instance.GameEnded -= OnGameEnd;
+    }
+
+    private void OnGameEnd(string reason)
+    {
+        Show();
+    }
+
+    private void Show()
+    {
+        ResultScreen.SetActive(true);
+    }
+
+    private void Hide()
     {
         ResultScreen.SetActive(false);
     }

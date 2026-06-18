@@ -25,6 +25,11 @@ public class SettingScreenController : MonoBehaviour
 
     public void OnSetting(InputAction.CallbackContext context)
     {
+        OnOff();
+    }
+
+    public void OnOff()
+    {
         if (!GameManager.Instance.IsGameOver)
         {
             _isSettingScreenOpen = !_isSettingScreenOpen;

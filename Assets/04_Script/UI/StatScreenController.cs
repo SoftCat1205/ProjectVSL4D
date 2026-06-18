@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
-[RequireComponent(typeof(Player))]
-public class StatAndUpgradeScreenController : MonoBehaviour
+public class StatScreenController : MonoBehaviour
 {
-    public GameObject StatAndUpgradeScreen;
+    public GameObject StatScreen;
+
+    [SerializeField] private Player player;
 
     [Header("Current Stat Displays")]
     [SerializeField] private TextMeshProUGUI _playerNameDisplay;
@@ -17,47 +18,37 @@ public class StatAndUpgradeScreenController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentMoveSpeedDisplay;
     [SerializeField] private TextMeshProUGUI _currentVisionDisplay;
 
-    private bool _isStatAndUpgradeScreenOpen = false;
-    private bool _canUpgrade = false;
-
-    private Player _player;
+    private bool _isStatScreenOpen = false;
 
     private void Awake()
     {
-        StatAndUpgradeScreen.SetActive(false);
-        _player = GetComponent<Player>();
+        StatScreen.SetActive(false);
     }
 
-    private void OnEnable()
+    private void Start()
     {
         InputManager.Instance.inputActions.Player.Status.performed += OnStatus;
-        _player.Stats.StatUpdate += OnRefresh;
-        _player.Stats.PlayerLevelUp += OnPlayerLevelUp;
+        player.Stats.StatUpdate += OnRefresh;
     }
 
     private void OnDisable()
     {
         InputManager.Instance.inputActions.Player.Status.performed -= OnStatus;
-        _player.Stats.StatUpdate -= OnRefresh;
+        player.Stats.StatUpdate -= OnRefresh;
     }
 
-    public void OnStatus(InputAction.CallbackContext context)
+    private void OnStatus(InputAction.CallbackContext context)
+    {
+        OnOff();
+    }
+
+    public void OnOff()
     {
         if (!GameManager.Instance.IsGameOver)
         {
-            _isStatAndUpgradeScreenOpen = !_isStatAndUpgradeScreenOpen;
-            StatAndUpgradeScreen.SetActive(_isStatAndUpgradeScreenOpen);
-
-            if (_canUpgrade)
-            {
-
-            }
+            _isStatScreenOpen = !_isStatScreenOpen;
+            StatScreen.SetActive(_isStatScreenOpen);
         }
-    }
-
-    public void OnPlayerLevelUp(PlayerStats playerStats)
-    {
-
     }
 
     private void OnRefresh(PlayerStats playerStats)
