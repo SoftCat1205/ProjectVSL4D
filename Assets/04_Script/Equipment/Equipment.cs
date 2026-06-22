@@ -4,7 +4,7 @@ using UnityEngine;
 public class Equipment : MonoBehaviour
 {
     public EquipmentScriptableObject EquipmentData;
-    public EquipmentManager equipmentManager;
+    public EquipmentCalculator EquipmentCalculator;
 
     protected virtual void ApplyModifier()
     {

@@ -2476,13 +2476,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9e4175a6511204eaee313ed573048c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HUDController
-  HUD: {fileID: 1485811101}
-  healthBarUI: {fileID: 0}
-  weaponBarUI: {fileID: 0}
-  equipmentBarUI: {fileID: 0}
-  inventoryBarUI: {fileID: 0}
-  statusBarUI: {fileID: 0}
-  timerUI: {fileID: 0}
+  _hud: {fileID: 0}
+  _equipmentBarUI: {fileID: 0}
+  _healthBarUI: {fileID: 0}
+  _inventoryBarUI: {fileID: 0}
+  _statusBarUI: {fileID: 0}
+  _timerUI: {fileID: 0}
+  _weaponBarUI: {fileID: 0}
 --- !u!114 &1139270002
 MonoBehaviour:
   m_ObjectHideFlags: 0

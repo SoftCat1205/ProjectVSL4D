@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public HUDController HUD { get; private set; }
     //Temp
     public PlayerWeaponManager WeaponManager { get; private set; }
+    public PlayerEquipmentManager EquipmentManager { get; private set; }
 
     private void Awake()
     {
@@ -29,12 +30,15 @@ public class Player : MonoBehaviour
         Inventory = GetComponent<PlayerInventory>();
         Statistics = GetComponent<PlayerStatistics>();
         WeaponManager = GetComponent<PlayerWeaponManager>();
+        EquipmentManager = GetComponent<PlayerEquipmentManager>();
         HUD = GetComponent<HUDController>();
     }
 
     private void Start()
     {
         PlayerManager.Instance.RegisterPlayer(this);
+
+        HUD.Initialize(this);
     }
 
     private void OnDestroy()

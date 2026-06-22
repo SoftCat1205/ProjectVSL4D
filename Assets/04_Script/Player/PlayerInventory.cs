@@ -84,9 +84,9 @@ public class PlayerInventory : MonoBehaviour
     public void AddWeapon(int slotIndex, WeaponController weapon)
     {
         weaponSlots[slotIndex] = weapon;
-        weaponLevels[slotIndex] = weapon.weaponData.Level;
+        weaponLevels[slotIndex] = weapon.WeaponData.Level;
         weaponUISlots[slotIndex].enabled = true;
-        weaponUISlots[slotIndex].sprite = weapon.weaponData.WeaponFamily.Icon;
+        weaponUISlots[slotIndex].sprite = weapon.WeaponData.WeaponFamily.Icon;
     }
 
     public void AddEquipment(int slotIndex, Equipment Equipment)
@@ -104,16 +104,11 @@ public class PlayerInventory : MonoBehaviour
             return;
         }
         WeaponController weapon = weaponSlots[slotIndex];
-        if (weapon.weaponData.NextLevelPrefab == null)
+        if (weapon.WeaponData.NextLevelWeaponData == null)
         {
             Debug.Log("NO NEXT LEVEL WEAPOND PREFAB");
             return;
         }
-        GameObject upgradedWeapon = Instantiate(weapon.weaponData.NextLevelPrefab, transform.position, Quaternion.identity);
-        upgradedWeapon.transform.SetParent(transform);
-        AddWeapon(slotIndex, upgradedWeapon.GetComponent<WeaponController>());
-        Destroy(weapon.gameObject);
-        weaponLevels[slotIndex] = upgradedWeapon.GetComponent<WeaponController>().weaponData.Level;
     }
 
     public void LevelUpEquipment(int slotIndex)
@@ -128,11 +123,6 @@ public class PlayerInventory : MonoBehaviour
             Debug.Log("NO NEXT LEVEL PASSIVE ITEM PREFAB");
             return;
         }
-        GameObject upgradedEquipment = Instantiate(Equipment.EquipmentData.NextLevelPrefab, transform.position, Quaternion.identity);
-        upgradedEquipment.transform.SetParent(transform);
-        AddEquipment(slotIndex, upgradedEquipment.GetComponent<Equipment>());
-        Destroy(Equipment.gameObject);
-        EquipmentLevels[slotIndex] = upgradedEquipment.GetComponent<Equipment>().EquipmentData.Level;
     }
 
     private void ApplyUpgradeOptions()

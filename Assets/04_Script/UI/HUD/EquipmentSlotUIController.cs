@@ -18,13 +18,5 @@ public class EquipmentSlotUIContoller : MonoBehaviour
         }
 
         icon.sprite = equipment.EquipmentData.Icon;
-        for (int i = 0; i < 5; i++)
-        {
-            currentLevelDisplay[i] = emptySlotImage;
-        }
-        for (int i = 0; i < equipment.EquipmentData.Level; i++)
-        {
-            currentLevelDisplay[i] = levelImage;
-        }
     }
 }

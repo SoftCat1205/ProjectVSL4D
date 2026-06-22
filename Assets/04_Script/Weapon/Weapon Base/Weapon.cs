@@ -1,13 +1,15 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
 [RequireComponent(typeof(WeaponController))]
 public class Weapon : MonoBehaviour
 {
-    public string WeaponName { get; private set; }
-    public int Level { get; private set; }
-
     public WeaponController Controller { get; private set; }
+    public WeaponScriptableObject Data => Controller.WeaponData;
+    public string DisplayName => Data.WeaponFamily.DisplayName;
+    public int Level => Data.Level;
+    public WeaponCategory Category => Data.WeaponCategory;
+    public float Damage => Data.Damage;
+    public float Cooldown => Data.Cooldown;
 
     private void Awake()
     {
@@ -16,6 +18,6 @@ public class Weapon : MonoBehaviour
 
     public void LevelUp()
     {
-        Level++;
+        Controller.LevelUp();
     }
 }

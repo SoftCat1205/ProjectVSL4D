@@ -3,28 +3,34 @@ using UnityEngine.UI;
 
 public class WeaponSlotUIController : MonoBehaviour
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private Image cooldownOverlay;
-    [SerializeField] private Image[] currentLevelDisplay;
-    [SerializeField] private Image emptySlotImage;
-    [SerializeField] private Image levelImage;
+    [SerializeField] private Image _icon;
+    [SerializeField] private Image _cooldownOverlay;
+    [SerializeField] private Image[] _currentLevelDisplay = new Image[5];
+    [SerializeField] private Image _emptySlotImage;
+    [SerializeField] private Image _levelImage;
 
     public void SetWeapon(Weapon weapon)
     {
         if (weapon == null)
         {
-            icon = emptySlotImage;
+            _icon = _emptySlotImage;
             return;
         }
 
-        icon.sprite = weapon.Controller.weaponData.WeaponFamily.Icon;
+        _icon.sprite = weapon.Controller.WeaponData.WeaponFamily.Icon;
+
+        SetLevel(weapon.Controller.WeaponData.Level);
+    }
+
+    public void SetLevel(int Level)
+    {
         for (int i = 0; i < 5; i++)
         {
-            currentLevelDisplay[i] = emptySlotImage;
+            _currentLevelDisplay[i] = _emptySlotImage;
         }
-        for (int i = 0; i < weapon.Controller.weaponData.Level; i++)
+        for (int i = 0; i < Level; i++)
         {
-            currentLevelDisplay[i] = levelImage;
+            _currentLevelDisplay[i] = _levelImage;
         }
     }
 }
