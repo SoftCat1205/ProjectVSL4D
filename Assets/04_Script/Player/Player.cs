@@ -1,13 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(PlayerAnimator))]
-[RequireComponent(typeof(PlayerStats))]
-[RequireComponent(typeof(PlayerInventory))]
-[RequireComponent(typeof(PlayerStatistics))]
-
-[RequireComponent(typeof(PlayerWeaponManager))]
-[RequireComponent(typeof(HUDController))]
 public class Player : MonoBehaviour
 {
     public int PlayerID { get; private set; }

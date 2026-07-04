@@ -102,15 +102,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Attack"",
-                    ""type"": ""Button"",
-                    ""id"": ""6c2ab1b8-8984-453a-af3d-a3c78ae1679a"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""852140f2-7766-474d-8707-702459ba45f3"",
@@ -150,6 +141,51 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Status"",
                     ""type"": ""Button"",
                     ""id"": ""c18aceb2-7794-46b8-af5f-5d5fbe3676fd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""a6fa1339-7e81-464c-a975-ec0c954f02c0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftArm"",
+                    ""type"": ""Button"",
+                    ""id"": ""6c2ab1b8-8984-453a-af3d-a3c78ae1679a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightArm"",
+                    ""type"": ""Button"",
+                    ""id"": ""348689fd-be61-47e4-b1e3-7d04af74f11b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftShoulder"",
+                    ""type"": ""Button"",
+                    ""id"": ""94ad6085-5078-4407-b48c-cd74dfe1b567"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightShoulder"",
+                    ""type"": ""Button"",
+                    ""id"": ""43878275-2ada-4d75-aed0-2f2f25c8a5d9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -274,7 +310,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Attack"",
+                    ""action"": ""LeftArm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -330,6 +366,50 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Status"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ed5504c-a52f-4324-9ca2-deba885c62e7"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d55a625c-d68a-4fff-9b19-d809edc873ad"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightArm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e38e1207-d3f7-4c5e-ace5-5b27ad6f879e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftShoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""721f06fd-901f-43a1-9795-f6a8778be645"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightShoulder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -918,12 +998,16 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Augment = m_Player.FindAction("Augment", throwIfNotFound: true);
         m_Player_Setting = m_Player.FindAction("Setting", throwIfNotFound: true);
         m_Player_Status = m_Player.FindAction("Status", throwIfNotFound: true);
+        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_LeftArm = m_Player.FindAction("LeftArm", throwIfNotFound: true);
+        m_Player_RightArm = m_Player.FindAction("RightArm", throwIfNotFound: true);
+        m_Player_LeftShoulder = m_Player.FindAction("LeftShoulder", throwIfNotFound: true);
+        m_Player_RightShoulder = m_Player.FindAction("RightShoulder", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1018,12 +1102,16 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Augment;
     private readonly InputAction m_Player_Setting;
     private readonly InputAction m_Player_Status;
+    private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_LeftArm;
+    private readonly InputAction m_Player_RightArm;
+    private readonly InputAction m_Player_LeftShoulder;
+    private readonly InputAction m_Player_RightShoulder;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1039,10 +1127,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Move".
         /// </summary>
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/Attack".
-        /// </summary>
-        public InputAction @Attack => m_Wrapper.m_Player_Attack;
         /// <summary>
         /// Provides access to the underlying input action "Player/Interact".
         /// </summary>
@@ -1063,6 +1147,26 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Status".
         /// </summary>
         public InputAction @Status => m_Wrapper.m_Player_Status;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Aim".
+        /// </summary>
+        public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/LeftArm".
+        /// </summary>
+        public InputAction @LeftArm => m_Wrapper.m_Player_LeftArm;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/RightArm".
+        /// </summary>
+        public InputAction @RightArm => m_Wrapper.m_Player_RightArm;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/LeftShoulder".
+        /// </summary>
+        public InputAction @LeftShoulder => m_Wrapper.m_Player_LeftShoulder;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/RightShoulder".
+        /// </summary>
+        public InputAction @RightShoulder => m_Wrapper.m_Player_RightShoulder;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1092,9 +1196,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -1110,6 +1211,21 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Status.started += instance.OnStatus;
             @Status.performed += instance.OnStatus;
             @Status.canceled += instance.OnStatus;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
+            @LeftArm.started += instance.OnLeftArm;
+            @LeftArm.performed += instance.OnLeftArm;
+            @LeftArm.canceled += instance.OnLeftArm;
+            @RightArm.started += instance.OnRightArm;
+            @RightArm.performed += instance.OnRightArm;
+            @RightArm.canceled += instance.OnRightArm;
+            @LeftShoulder.started += instance.OnLeftShoulder;
+            @LeftShoulder.performed += instance.OnLeftShoulder;
+            @LeftShoulder.canceled += instance.OnLeftShoulder;
+            @RightShoulder.started += instance.OnRightShoulder;
+            @RightShoulder.performed += instance.OnRightShoulder;
+            @RightShoulder.canceled += instance.OnRightShoulder;
         }
 
         /// <summary>
@@ -1124,9 +1240,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -1142,6 +1255,21 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Status.started -= instance.OnStatus;
             @Status.performed -= instance.OnStatus;
             @Status.canceled -= instance.OnStatus;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
+            @LeftArm.started -= instance.OnLeftArm;
+            @LeftArm.performed -= instance.OnLeftArm;
+            @LeftArm.canceled -= instance.OnLeftArm;
+            @RightArm.started -= instance.OnRightArm;
+            @RightArm.performed -= instance.OnRightArm;
+            @RightArm.canceled -= instance.OnRightArm;
+            @LeftShoulder.started -= instance.OnLeftShoulder;
+            @LeftShoulder.performed -= instance.OnLeftShoulder;
+            @LeftShoulder.canceled -= instance.OnLeftShoulder;
+            @RightShoulder.started -= instance.OnRightShoulder;
+            @RightShoulder.performed -= instance.OnRightShoulder;
+            @RightShoulder.canceled -= instance.OnRightShoulder;
         }
 
         /// <summary>
@@ -1450,13 +1578,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAttack(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1491,6 +1612,41 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnStatus(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftArm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftArm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RightArm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightArm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftShoulder" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftShoulder(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RightShoulder" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightShoulder(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class WeaponFamilyScriptableObject : MonoBehaviour
 {
+    [SerializeField] private WeaponCategory category;
+    public WeaponCategory Category { get => category; private set => category = value; }
+
     [SerializeField] private string displayName;
     public string DisplayName { get => displayName; private set => displayName = value; }
 
