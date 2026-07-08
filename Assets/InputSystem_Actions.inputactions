@@ -88,7 +88,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LeftShoulder",
+                    "name": "LeftBack",
                     "type": "Button",
                     "id": "94ad6085-5078-4407-b48c-cd74dfe1b567",
                     "expectedControlType": "",
@@ -97,7 +97,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightShoulder",
+                    "name": "RightBack",
                     "type": "Button",
                     "id": "43878275-2ada-4d75-aed0-2f2f25c8a5d9",
                     "expectedControlType": "",
@@ -312,7 +312,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftShoulder",
+                    "action": "LeftBack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -323,7 +323,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightShoulder",
+                    "action": "RightBack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

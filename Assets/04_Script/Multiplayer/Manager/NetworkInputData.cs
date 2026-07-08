@@ -5,8 +5,8 @@ public enum InputButtons
 {
     LeftArm,
     RightArm,
-    LeftShoulder,
-    RightShoulder,
+    LeftBack,
+    RightBack,
     Augment,
     Interact
 }

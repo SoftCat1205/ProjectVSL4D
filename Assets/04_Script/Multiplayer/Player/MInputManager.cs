@@ -7,8 +7,8 @@ public class MInputManager : MonoBehaviour
 
     public bool LeftArm { get; private set; }
     public bool RightArm { get; private set; }
-    public bool LeftShoulder { get; private set; }
-    public bool RightShoulder { get; private set; }
+    public bool LeftBack { get; private set; }
+    public bool RightBack { get; private set; }
     public bool Augment { get; private set; }
     public bool Interact { get; private set; }
 
@@ -36,8 +36,8 @@ public class MInputManager : MonoBehaviour
         Aim = Camera.main.ScreenToWorldPoint(screenAim);
         LeftArm = _inputActions.Player.LeftArm.IsPressed();
         RightArm = _inputActions.Player.RightArm.IsPressed();
-        LeftShoulder = _inputActions.Player.LeftShoulder.IsPressed();
-        RightShoulder = _inputActions.Player.RightShoulder.IsPressed();
+        LeftBack = _inputActions.Player.LeftBack.IsPressed();
+        RightBack = _inputActions.Player.RightBack.IsPressed();
         Augment = _inputActions.Player.Augment.IsPressed();
         Interact = _inputActions.Player.Interact.IsPressed();
     }

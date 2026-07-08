@@ -174,7 +174,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LeftShoulder"",
+                    ""name"": ""LeftBack"",
                     ""type"": ""Button"",
                     ""id"": ""94ad6085-5078-4407-b48c-cd74dfe1b567"",
                     ""expectedControlType"": """",
@@ -183,7 +183,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RightShoulder"",
+                    ""name"": ""RightBack"",
                     ""type"": ""Button"",
                     ""id"": ""43878275-2ada-4d75-aed0-2f2f25c8a5d9"",
                     ""expectedControlType"": """",
@@ -398,7 +398,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftShoulder"",
+                    ""action"": ""LeftBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -409,7 +409,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightShoulder"",
+                    ""action"": ""RightBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1006,8 +1006,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_LeftArm = m_Player.FindAction("LeftArm", throwIfNotFound: true);
         m_Player_RightArm = m_Player.FindAction("RightArm", throwIfNotFound: true);
-        m_Player_LeftShoulder = m_Player.FindAction("LeftShoulder", throwIfNotFound: true);
-        m_Player_RightShoulder = m_Player.FindAction("RightShoulder", throwIfNotFound: true);
+        m_Player_LeftBack = m_Player.FindAction("LeftBack", throwIfNotFound: true);
+        m_Player_RightBack = m_Player.FindAction("RightBack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1110,8 +1110,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_LeftArm;
     private readonly InputAction m_Player_RightArm;
-    private readonly InputAction m_Player_LeftShoulder;
-    private readonly InputAction m_Player_RightShoulder;
+    private readonly InputAction m_Player_LeftBack;
+    private readonly InputAction m_Player_RightBack;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1160,13 +1160,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @RightArm => m_Wrapper.m_Player_RightArm;
         /// <summary>
-        /// Provides access to the underlying input action "Player/LeftShoulder".
+        /// Provides access to the underlying input action "Player/LeftBack".
         /// </summary>
-        public InputAction @LeftShoulder => m_Wrapper.m_Player_LeftShoulder;
+        public InputAction @LeftBack => m_Wrapper.m_Player_LeftBack;
         /// <summary>
-        /// Provides access to the underlying input action "Player/RightShoulder".
+        /// Provides access to the underlying input action "Player/RightBack".
         /// </summary>
-        public InputAction @RightShoulder => m_Wrapper.m_Player_RightShoulder;
+        public InputAction @RightBack => m_Wrapper.m_Player_RightBack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1220,12 +1220,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @RightArm.started += instance.OnRightArm;
             @RightArm.performed += instance.OnRightArm;
             @RightArm.canceled += instance.OnRightArm;
-            @LeftShoulder.started += instance.OnLeftShoulder;
-            @LeftShoulder.performed += instance.OnLeftShoulder;
-            @LeftShoulder.canceled += instance.OnLeftShoulder;
-            @RightShoulder.started += instance.OnRightShoulder;
-            @RightShoulder.performed += instance.OnRightShoulder;
-            @RightShoulder.canceled += instance.OnRightShoulder;
+            @LeftBack.started += instance.OnLeftBack;
+            @LeftBack.performed += instance.OnLeftBack;
+            @LeftBack.canceled += instance.OnLeftBack;
+            @RightBack.started += instance.OnRightBack;
+            @RightBack.performed += instance.OnRightBack;
+            @RightBack.canceled += instance.OnRightBack;
         }
 
         /// <summary>
@@ -1264,12 +1264,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @RightArm.started -= instance.OnRightArm;
             @RightArm.performed -= instance.OnRightArm;
             @RightArm.canceled -= instance.OnRightArm;
-            @LeftShoulder.started -= instance.OnLeftShoulder;
-            @LeftShoulder.performed -= instance.OnLeftShoulder;
-            @LeftShoulder.canceled -= instance.OnLeftShoulder;
-            @RightShoulder.started -= instance.OnRightShoulder;
-            @RightShoulder.performed -= instance.OnRightShoulder;
-            @RightShoulder.canceled -= instance.OnRightShoulder;
+            @LeftBack.started -= instance.OnLeftBack;
+            @LeftBack.performed -= instance.OnLeftBack;
+            @LeftBack.canceled -= instance.OnLeftBack;
+            @RightBack.started -= instance.OnRightBack;
+            @RightBack.performed -= instance.OnRightBack;
+            @RightBack.canceled -= instance.OnRightBack;
         }
 
         /// <summary>
@@ -1634,19 +1634,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRightArm(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "LeftShoulder" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "LeftBack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnLeftShoulder(InputAction.CallbackContext context);
+        void OnLeftBack(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "RightShoulder" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "RightBack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnRightShoulder(InputAction.CallbackContext context);
+        void OnRightBack(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

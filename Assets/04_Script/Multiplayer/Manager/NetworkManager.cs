@@ -59,8 +59,8 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
         data.Buttons.Set(InputButtons.LeftArm, inputManager.LeftArm);
         data.Buttons.Set(InputButtons.RightArm, inputManager.RightArm);
-        data.Buttons.Set(InputButtons.LeftShoulder, inputManager.LeftShoulder);
-        data.Buttons.Set(InputButtons.RightShoulder, inputManager.RightShoulder);
+        data.Buttons.Set(InputButtons.LeftBack, inputManager.LeftBack);
+        data.Buttons.Set(InputButtons.RightBack, inputManager.RightBack);
         data.Buttons.Set(InputButtons.Augment, inputManager.Augment);
         data.Buttons.Set(InputButtons.Interact, inputManager.Interact);
 
