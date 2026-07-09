@@ -7,7 +7,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public static PlayerInventory Instance;
 
-    public List<WeaponController> weaponSlots = new(4);
+    public List<MWeaponController> weaponSlots = new(4);
     public int[] weaponLevels = new int[4];
     public List<Image> weaponUISlots = new(4);
     public int weaponIndex = 0;
@@ -60,7 +60,7 @@ public class PlayerInventory : MonoBehaviour
 
         GameObject spawnedWeapon = Instantiate(weapon, transform.position, quaternion.identity);
         spawnedWeapon.transform.SetParent(transform);
-        AddWeapon(weaponIndex, spawnedWeapon.GetComponent<WeaponController>());
+        AddWeapon(weaponIndex, spawnedWeapon.GetComponent<MWeaponController>());
 
         weaponIndex++;
     }
@@ -81,7 +81,7 @@ public class PlayerInventory : MonoBehaviour
         EquipmentIndex++;
     }
 
-    public void AddWeapon(int slotIndex, WeaponController weapon)
+    public void AddWeapon(int slotIndex, MWeaponController weapon)
     {
         weaponSlots[slotIndex] = weapon;
         weaponLevels[slotIndex] = weapon.WeaponData.Level;
@@ -103,7 +103,7 @@ public class PlayerInventory : MonoBehaviour
         {
             return;
         }
-        WeaponController weapon = weaponSlots[slotIndex];
+        MWeaponController weapon = weaponSlots[slotIndex];
         if (weapon.WeaponData.NextLevelWeaponData == null)
         {
             Debug.Log("NO NEXT LEVEL WEAPOND PREFAB");

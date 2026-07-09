@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: -5771655706795708737}
   - component: {fileID: 1298556228042969107}
   - component: {fileID: 5821641108311263482}
+  - component: {fileID: 2366783934774260923}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -247,6 +248,7 @@ MonoBehaviour:
   - {fileID: -2208744298425422487}
   - {fileID: 1298556228042969107}
   - {fileID: 5821641108311263482}
+  - {fileID: 2366783934774260923}
   - {fileID: 5752577424323846532}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &-2208744298425422487
@@ -264,7 +266,7 @@ MonoBehaviour:
   playerMovement: {fileID: -5771655706795708737}
   playerFacing: {fileID: 1298556228042969107}
   playerAim: {fileID: 5821641108311263482}
-  weapon: {fileID: 5752577424323846532}
+  playerWeapon: {fileID: 2366783934774260923}
 --- !u!114 &-5771655706795708737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +307,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MPlayerAim
   weapon: {fileID: 8610200727987332537}
+--- !u!114 &2366783934774260923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5267058451530273773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a0c4cfae58cb048b5d1f108e0556f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MPlayerWeapon
+  leftArm: {fileID: 0}
+  rightArm: {fileID: 0}
+  leftBack: {fileID: 0}
+  rightBack: {fileID: 0}
 --- !u!1 &6282471920964433240
 GameObject:
   m_ObjectHideFlags: 0

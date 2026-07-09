@@ -4,10 +4,10 @@ using UnityEngine;
 public class MPlayerWeapon : NetworkBehaviour
 {
     [Header("Weapon Slots")]
-    [SerializeField] private MWeapon leftArm;
-    [SerializeField] private MWeapon rightArm;
-    [SerializeField] private MWeapon leftBack;
-    [SerializeField] private MWeapon rightBack;
+    [SerializeField] private MWeaponController leftArm;
+    [SerializeField] private MWeaponController rightArm;
+    [SerializeField] private MWeaponController leftBack;
+    [SerializeField] private MWeaponController rightBack;
 
     public void Activate(NetworkInputData input)
     {
