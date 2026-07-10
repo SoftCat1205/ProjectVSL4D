@@ -1,3 +1,4 @@
+using Fusion;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponScriptableObject", menuName = "ScriptableObjects/Weapons")]

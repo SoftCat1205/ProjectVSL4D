@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class PlayerWeaponManager : MonoBehaviour
 {
-    public event Action<int, Weapon> WeaponUpdate;
+    public event Action<int, MWeaponController> WeaponUpdate;
 
-    [SerializeField] private Weapon[] weaponSlots = new Weapon[4];
-    public Weapon[] WeaponSlots => weaponSlots;
+    [SerializeField] private MWeaponController[] weaponSlots = new MWeaponController[4];
+    public MWeaponController[] WeaponSlots => weaponSlots;
 
-    public void PlaceWeapon(int index, Weapon weapon)
+    public void PlaceWeapon(int index, MWeaponController weapon)
     {
         WeaponSlots[index] = weapon;
         WeaponUpdate?.Invoke(index, weapon);
@@ -28,14 +28,14 @@ public class PlayerWeaponManager : MonoBehaviour
         weaponSlots[index].LevelUp();
     }
 
-    public Weapon GetWeapon(int index)
+    public MWeaponController GetWeapon(int index)
     {
         return weaponSlots[index];
     }
 
-    public bool HasWeapon(Weapon weapon)
+    public bool HasWeapon(MWeaponController weapon)
     {
-        foreach (Weapon weaponSlot in weaponSlots)
+        foreach (MWeaponController weaponSlot in weaponSlots)
         {
             if (weaponSlot == weapon)
             {

@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class MWeaponController : NetworkBehaviour
 {
+    [Networked] public NetworkObject Owner { get; set; }
+    [Networked] public int SlotIndex { get; set; }
+
+
     [Header("Weapon Stats")]
     [SerializeField] protected WeaponScriptableObject weaponData;
     public WeaponScriptableObject WeaponData => weaponData;
@@ -19,7 +23,7 @@ public class MWeaponController : NetworkBehaviour
         }
     }
 
-    public virtual void Activate()
+    public virtual void Activate(Vector2 direction)
     {
         if (_currentCooldown < 0f)
         {

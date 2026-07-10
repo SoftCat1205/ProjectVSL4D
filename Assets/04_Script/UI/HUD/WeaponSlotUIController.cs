@@ -9,7 +9,7 @@ public class WeaponSlotUIController : MonoBehaviour
     [SerializeField] private Image _emptySlotImage;
     [SerializeField] private Image _levelImage;
 
-    public void SetWeapon(Weapon weapon)
+    public void SetWeapon(MWeaponController weapon)
     {
         if (weapon == null)
         {
@@ -17,9 +17,9 @@ public class WeaponSlotUIController : MonoBehaviour
             return;
         }
 
-        _icon.sprite = weapon.Controller.WeaponData.WeaponFamily.Icon;
+        _icon.sprite = weapon.WeaponData.WeaponFamily.Icon;
 
-        SetLevel(weapon.Controller.WeaponData.Level);
+        SetLevel(weapon.WeaponData.Level);
     }
 
     public void SetLevel(int Level)

@@ -12,7 +12,7 @@ public class WeaponBarUIController : MonoBehaviour
         }
     }
 
-    public void UpdateSlot(int index, Weapon weapon)
+    public void UpdateSlot(int index, MWeaponController weapon)
     {
         _weaponSlotUI[index].SetWeapon(weapon);
     }

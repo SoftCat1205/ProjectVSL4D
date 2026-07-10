@@ -8,6 +8,8 @@ public class MPlayerController : NetworkBehaviour
     [SerializeField] private MPlayerAim playerAim;
     [SerializeField] private MPlayerWeapon playerWeapon;
 
+    [SerializeField] private MWeaponController startWeapon;
+
     public override void FixedUpdateNetwork()
     {
         if (!Object.HasInputAuthority)
@@ -25,5 +27,7 @@ public class MPlayerController : NetworkBehaviour
     public override void Spawned()
     {
         Debug.Log($"Spawned! StateAuthority={Object.HasStateAuthority}, InputAuthority={Object.HasInputAuthority}");
+
+        playerWeapon.EquipWeapon(startWeapon, 0);
     }
 }
