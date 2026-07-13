@@ -8,7 +8,7 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] public float currentMoveSpeed;
     [SerializeField] private float currentHealth;
     [SerializeField] private float currentDamage;
-    [SerializeField] private Player currentTarget;
+    [SerializeField] private Transform currentTarget;
 
     [SerializeField] private float despawnDistance = 20f;
     [SerializeField] private float shortestDistance;
@@ -36,22 +36,7 @@ public class EnemyStats : MonoBehaviour
 
     private void FindClosestPlayer()
     {
-        float shortestDistance = Mathf.Infinity;
-        Player closestPlayer = null;
-
-        foreach (Player player in PlayerManager.Instance.Players)
-        {
-            if (!player.Stats.IsAlive)
-                continue;
-
-            float distance = Vector3.Distance(transform.position, player.transform.position);
-
-            if (distance < shortestDistance)
-            {
-                shortestDistance = distance;
-                closestPlayer = player;
-            }
-        }
+        Transform closestPlayer = null;
 
         currentTarget = closestPlayer;
     }
@@ -73,9 +58,8 @@ public class EnemyStats : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent(out Transform player))
         {
-            player.Stats.TakeDamage(currentDamage);
         }
     }
 

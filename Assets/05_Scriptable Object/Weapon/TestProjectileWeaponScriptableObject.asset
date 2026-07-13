@@ -16,6 +16,7 @@ MonoBehaviour:
   weaponFamily: {fileID: 0}
   damage: 1
   speed: 25
-  cooldown: 1
+  cooldown: 0.05
+  lifetime: 0
   level: 0
   nextLevelWeaponData: {fileID: 0}

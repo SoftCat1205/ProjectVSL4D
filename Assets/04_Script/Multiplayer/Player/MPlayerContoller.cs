@@ -7,8 +7,11 @@ public class MPlayerController : NetworkBehaviour
     [SerializeField] private MPlayerFacing playerFacing;
     [SerializeField] private MPlayerAim playerAim;
     [SerializeField] private MPlayerWeapon playerWeapon;
+    [SerializeField] private MPlayerCamera playerCamera;
 
-    [SerializeField] private MWeaponController startWeapon;
+    [SerializeField] private MWeapon startWeapon;
+
+    public Vector2 AimDirection { get; private set; }
 
     public override void FixedUpdateNetwork()
     {
@@ -18,10 +21,13 @@ public class MPlayerController : NetworkBehaviour
         if (!GetInput(out NetworkInputData input))
             return;
 
+        AimDirection = (input.Aim - (Vector2)transform.position).normalized;
+
         playerMovement.Move(input.Move);
-        playerFacing.Facing(input.Aim);
-        playerAim.Aim(input.Aim);
-        playerWeapon.Activate(input);
+        playerFacing.Facing(AimDirection);
+        playerAim.Aim(AimDirection);
+        playerWeapon.Activate(input, AimDirection);
+        playerCamera.UpdateAim(AimDirection);
     }
 
     public override void Spawned()

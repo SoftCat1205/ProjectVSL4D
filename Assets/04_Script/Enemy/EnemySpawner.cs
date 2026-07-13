@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public Player player;
     public static EnemySpawner Instance;
 
     [System.Serializable]

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-
     public CharacterScriptableObject CharacterData;
     public WeaponScriptableObject StartWeaponData;
 
@@ -144,7 +143,7 @@ public class PlayerStats : MonoBehaviour
     public int level = 1;
     public int experienceCap;
 
-    [System.Serializable]
+    [Serializable]
     public class LevelRange
     {
         public int startLevel;
@@ -196,7 +195,6 @@ public class PlayerStats : MonoBehaviour
         {
             isInvincible = false;
         }
-        Recover(1);
     }
 
     public void IncreaseExperience(int amount)

@@ -11,12 +11,10 @@ public class RunManager : MonoBehaviour
     [Header("Timer")]
     private float _currentTime;
     public TextMeshProUGUI StopWatchDisplay;
-    private readonly float _maxTimeLimit = 10000;
+    private readonly float _maxTimeLimit = 38400;
 
     private void Awake()
     {
-        GameHub.Register(this);
-
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -27,10 +25,7 @@ public class RunManager : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.IsGameOver)
-        {
-            UpdateCurrentTime();
-        }
+        UpdateCurrentTime();
     }
 
     private void UpdateCurrentTime()

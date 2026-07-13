@@ -5,13 +5,12 @@ public class MPlayerFacing : NetworkBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    public void Facing(Vector2 aimPosition)
+    public void Facing(Vector2 direction)
     {
-        float direction = aimPosition.x - transform.position.x;
 
-        if (direction > 0)
+        if (direction.x > 0)
             FaceRight();
-        else if (direction < 0)
+        else if (direction.x < 0)
             FaceLeft();
     }
 

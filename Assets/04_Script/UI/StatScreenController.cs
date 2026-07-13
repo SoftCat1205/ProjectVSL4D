@@ -6,8 +6,6 @@ public class StatScreenController : MonoBehaviour
 {
     public GameObject StatScreen;
 
-    [SerializeField] private Player player;
-
     [Header("Current Stat Displays")]
     [SerializeField] private TextMeshProUGUI _playerNameDisplay;
     [SerializeField] private TextMeshProUGUI _currentMaxHealthDisplay;
@@ -25,18 +23,6 @@ public class StatScreenController : MonoBehaviour
         StatScreen.SetActive(false);
     }
 
-    private void Start()
-    {
-        InputManager.Instance.inputActions.Player.Status.performed += OnStatus;
-        player.Stats.StatUpdate += OnRefresh;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.Instance.inputActions.Player.Status.performed -= OnStatus;
-        player.Stats.StatUpdate -= OnRefresh;
-    }
-
     private void OnStatus(InputAction.CallbackContext context)
     {
         OnOff();
@@ -44,11 +30,8 @@ public class StatScreenController : MonoBehaviour
 
     public void OnOff()
     {
-        if (!GameManager.Instance.IsGameOver)
-        {
-            _isStatScreenOpen = !_isStatScreenOpen;
-            StatScreen.SetActive(_isStatScreenOpen);
-        }
+        _isStatScreenOpen = !_isStatScreenOpen;
+        StatScreen.SetActive(_isStatScreenOpen);
     }
 
     private void OnRefresh(PlayerStats playerStats)

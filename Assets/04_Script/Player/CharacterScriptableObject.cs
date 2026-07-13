@@ -4,26 +4,26 @@ using UnityEngine;
 public class CharacterScriptableObject : ScriptableObject
 {
     [SerializeField] private string playerName;
-    public string PlayerName { get => playerName; private set => playerName = value; }
+    public string PlayerName => playerName;
 
     [SerializeField] private GameObject startingWeapon;
-    public GameObject StartingWeapon { get => startingWeapon; private set => startingWeapon = value; }
+    public GameObject StartingWeapon => startingWeapon;
 
     [SerializeField] private float maxHealth;
-    public float MaxHealth { get => maxHealth; private set => maxHealth = value; }
+    public float MaxHealth => maxHealth;
 
     [SerializeField] private float recovery;
-    public float Recovery { get => recovery; private set => recovery = value; }
+    public float Recovery => recovery;
 
     [SerializeField] private float armour;
-    public float Armour { get => armour; private set => armour = value; }
+    public float Armour => armour;
 
     [SerializeField] private float moveSpeed;
-    public float MoveSpeed { get => moveSpeed; private set => moveSpeed = value; }
+    public float MoveSpeed => moveSpeed;
 
     [SerializeField] private float abilityHaste;
-    public float AbilityHaste { get => abilityHaste; private set => abilityHaste = value; }
+    public float AbilityHaste => abilityHaste;
 
     [SerializeField] private float vision;
-    public float Vision { get => vision; private set => vision = value; }
+    public float Vision => vision;
 }
