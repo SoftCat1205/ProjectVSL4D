@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
-public class MPlayerWeapon : NetworkBehaviour
+public class MPlayerWeaponManager : NetworkBehaviour
 {
     [Header("Weapon Slots")]
     [SerializeField] private List<MWeapon> weapons = new(4);

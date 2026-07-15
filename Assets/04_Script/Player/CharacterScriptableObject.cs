@@ -6,8 +6,8 @@ public class CharacterScriptableObject : ScriptableObject
     [SerializeField] private string playerName;
     public string PlayerName => playerName;
 
-    [SerializeField] private GameObject startingWeapon;
-    public GameObject StartingWeapon => startingWeapon;
+    [SerializeField] private WeaponScriptableObject startingWeapon;
+    public WeaponScriptableObject StartingWeapon => startingWeapon;
 
     [SerializeField] private float maxHealth;
     public float MaxHealth => maxHealth;
