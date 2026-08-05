@@ -1,12 +1,12 @@
 using Fusion;
 using UnityEngine;
 
-public class MPlayerController : NetworkBehaviour
+public class MPlayer : NetworkBehaviour
 {
     [SerializeField] private MPlayerMovement playerMovement;
     [SerializeField] private MPlayerFacing playerFacing;
     [SerializeField] private MPlayerAim playerAim;
-    [SerializeField] private MPlayerWeapon playerWeapon;
+    [SerializeField] private MWeaponManager playerWeapon;
     [SerializeField] private MPlayerCamera playerCamera;
 
     [SerializeField] private MWeapon startWeapon;

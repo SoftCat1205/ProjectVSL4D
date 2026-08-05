@@ -6,8 +6,7 @@ public class MEquipment : NetworkBehaviour
     [Networked] public NetworkObject Owner { get; set; }
     [Networked] public int SlotIndex { get; set; }
 
-    [Header("Equipment Stats")]
-    [SerializeField] protected EquipmentScriptableObject equipmentData;
+    protected EquipmentScriptableObject equipmentData;
     public EquipmentScriptableObject EquipmentData => equipmentData;
     public int Level => EquipmentData.Level;
 
@@ -19,20 +18,13 @@ public class MEquipment : NetworkBehaviour
         if (_currentCooldown == 0f)
             return;
 
-        if (_currentCooldown < 0f)
-            _currentCooldown = 0f;
-
         if (_currentCooldown > 0f)
             _currentCooldown -= Time.deltaTime;
     }
 
-    public virtual void Activate()
+    public void Initialize(EquipmentScriptableObject equipmentData)
     {
-        if (_currentCooldown <= 0f)
-        {
-            Debug.Log("Activated Weapon!");
-            _currentCooldown = EquipmentData.Cooldown;
-        }
+        this.equipmentData = equipmentData;
     }
 
     public void LevelUp()

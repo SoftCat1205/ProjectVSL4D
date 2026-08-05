@@ -6,9 +6,9 @@ public class MWeapon : NetworkBehaviour
     [Networked] public NetworkObject Owner { get; set; }
     [Networked] public int SlotIndex { get; set; }
 
+    public NetworkObject NetworkObject { get; private set; }
 
-    [Header("Weapon Stats")]
-    [SerializeField] protected WeaponScriptableObject weaponData;
+    protected WeaponScriptableObject weaponData;
     public WeaponScriptableObject WeaponData => weaponData;
     public int Level => WeaponData.Level;
 
@@ -22,6 +22,11 @@ public class MWeapon : NetworkBehaviour
 
         if (_currentCooldown > 0f)
             _currentCooldown -= Time.deltaTime;
+    }
+
+    public void Initialize(WeaponScriptableObject weaponData)
+    {
+        this.weaponData = weaponData;
     }
 
     public virtual void Activate(Vector2 direction)

@@ -8,7 +8,7 @@ public class MPlayerStats : NetworkBehaviour
     [SerializeField] private CharacterScriptableObject characterData;
     [SerializeField] private MEquipmentManager equipmentManager;
 
-    public event Action StatsChanged;
+    public event Action StatsUpdate;
 
     // Networked
     [Networked] public float Health { get; set; }
@@ -47,7 +47,7 @@ public class MPlayerStats : NetworkBehaviour
 
         ApplyStats();
 
-        StatsChanged?.Invoke();
+        StatsUpdate?.Invoke();
     }
 
     private void ResetStats()
@@ -128,7 +128,6 @@ public class MPlayerStats : NetworkBehaviour
                 break;
         }
     }
-
 
     private void ClampStats()
     {

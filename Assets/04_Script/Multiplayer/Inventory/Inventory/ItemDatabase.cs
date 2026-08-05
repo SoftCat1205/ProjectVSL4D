@@ -1,23 +1,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDatabase : MonoBehaviour
+[CreateAssetMenu(fileName = "ItemDatabase", menuName = "Items/Database")]
+public class ItemDatabase : ScriptableObject
 {
-    [SerializeField] private List<ItemScriptableObject> itemList;
-    [SerializeField] private Dictionary<int, ItemScriptableObject> database;
+    public List<ItemScriptableObject> Items;
 
-    private void Start()
+    private Dictionary<int, ItemScriptableObject> itemDictionary;
+
+
+    public void Initialize()
     {
-        database = new Dictionary<int, ItemScriptableObject>();
+        itemDictionary = new Dictionary<int, ItemScriptableObject>();
 
-        foreach (ItemScriptableObject item in itemList)
+        foreach (ItemScriptableObject item in Items)
         {
-            database.Add(item.ItemID, item);
+            if (itemDictionary.ContainsKey(item.ItemID))
+            {
+                Debug.LogError($"Duplicate Item ID: {item.ItemID}");
+                continue;
+            }
+
+            itemDictionary.Add(item.ItemID, item);
         }
     }
 
-    public ItemScriptableObject GetItem(int itemID)
+
+    public ItemScriptableObject GetItem(int id)
     {
-        return database[itemID];
+        if (itemDictionary.TryGetValue(id, out ItemScriptableObject item))
+        {
+            return item;
+        }
+
+        Debug.LogError($"Item ID {id} does not exist");
+        return null;
     }
 }
