@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkRunner networkRunner;
-    [SerializeField] private MInputManager inputManager;
+    [SerializeField] private InputManager inputManager;
     [SerializeField] private NetworkSceneManagerDefault networkSceneManagerDefault;
     [SerializeField] private NetworkObject playerPrefab;
 

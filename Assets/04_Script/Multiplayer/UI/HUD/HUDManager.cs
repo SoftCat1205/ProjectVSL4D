@@ -3,23 +3,23 @@ using UnityEngine;
 public class MHUDManager : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private MHealthUI healthUI;
-    [SerializeField] private MStatsUI statsUI;
-    [SerializeField] private MInventoryUI inventoryUI;
-    [SerializeField] private MEquipmentUI equipmentUI;
-    [SerializeField] private MWeaponUI weaponUI;
+    [SerializeField] private HealthUI healthUI;
+    [SerializeField] private StatsUI statsUI;
+    [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private EquipmentUI equipmentUI;
+    [SerializeField] private WeaponUI weaponUI;
 
-    private MPlayerStats _playerStats;
-    private MInventory _inventory;
-    private MEquipmentManager _equipmentManager;
-    private MWeaponManager _weaponManager;
+    private PlayerStats _playerStats;
+    private InventoryManager _inventory;
+    private EquipmentManager _equipmentManager;
+    private WeaponManager _weaponManager;
 
-    public void Initialize(MPlayer player)
+    public void Initialize(Player player)
     {
-        _playerStats = player.GetComponent<MPlayerStats>();
-        _inventory = player.GetComponent<MInventory>();
-        _equipmentManager = player.GetComponent<MEquipmentManager>();
-        _weaponManager = player.GetComponent<MWeaponManager>();
+        _playerStats = player.GetComponent<PlayerStats>();
+        _inventory = player.GetComponent<InventoryManager>();
+        _equipmentManager = player.GetComponent<EquipmentManager>();
+        _weaponManager = player.GetComponent<WeaponManager>();
 
         healthUI.Initialize(_playerStats);
         statsUI.Initialize(_playerStats);

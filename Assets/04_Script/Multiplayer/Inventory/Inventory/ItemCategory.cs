@@ -1,9 +1,9 @@
 public enum ItemCategory
 {
+    LeftBack,
+    RightBack,
     LeftArm,
     RightArm,
-    LeftShoulder,
-    RightShoulder,
 
     Head,
     Body,

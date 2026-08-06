@@ -1,7 +1,7 @@
 using Fusion;
 using UnityEngine;
 
-public class MTestProjectileWeapon : MWeapon
+public class MTestProjectileWeapon : Weapon
 {
     public override void Activate(Vector2 direction)
     {

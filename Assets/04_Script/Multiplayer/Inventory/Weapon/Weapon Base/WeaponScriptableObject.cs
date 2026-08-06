@@ -9,8 +9,8 @@ public class WeaponScriptableObject : ItemScriptableObject
     [SerializeField] private GameObject prefab;
     public GameObject Prefab => prefab;
 
-    [SerializeField] private MWeapon weapon;
-    public MWeapon Weapon => weapon;
+    [SerializeField] private Weapon weapon;
+    public Weapon Weapon => weapon;
 
     [SerializeField] private List<ItemCategory> category;
     public List<ItemCategory> Category => category;

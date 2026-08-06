@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EquipmentScriptableObject", menuName = "ScriptableObjects/Passive Item", order = 0)]
 public class EquipmentScriptableObject : ItemScriptableObject
 {
-    [SerializeField] private MEquipment equipment;
-    public MEquipment Equipment => equipment;
+    [SerializeField] private Equipment equipment;
+    public Equipment Equipment => equipment;
 
     [SerializeField] private ItemCategory category;
     public ItemCategory Category => category;

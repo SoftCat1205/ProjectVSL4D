@@ -25,7 +25,6 @@ public class ItemDatabase : ScriptableObject
         }
     }
 
-
     public ItemScriptableObject GetItem(int id)
     {
         if (itemDictionary.TryGetValue(id, out ItemScriptableObject item))

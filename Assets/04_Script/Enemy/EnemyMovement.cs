@@ -13,6 +13,6 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position = Vector2.MoveTowards(transform.position, PlayerMovement.Instance.transform.position, es.currentMoveSpeed * Time.deltaTime);
+
     }
 }
