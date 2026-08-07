@@ -7,7 +7,7 @@ public class MTestProjectileWeapon : Weapon
     {
         if (_currentCooldown <= 0f)
         {
-            NetworkObject projectile = Runner.Spawn(weaponData.Prefab, transform.position, Quaternion.identity);
+            NetworkObject projectile = Runner.Spawn(weaponData.Weapon, transform.position, Quaternion.identity);
 
             projectile.GetComponent<MWeaponBehaviourProjectileTest>().Initialize(direction, weaponData);
 

@@ -1,7 +1,6 @@
 using UnityEngine;
-using Fusion;
 
-public class ItemManager : NetworkBehaviour
+public class ItemManager : MonoBehaviour
 {
     private InventoryManager inventory;
     private EquipmentManager equipmentManager;

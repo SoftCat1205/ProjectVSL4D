@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MCrafting : MonoBehaviour
+public class Crafting : MonoBehaviour
 {
     public bool CanCrafft(RecipeScriptableObejct recipe, InventoryManager inventory)
     {

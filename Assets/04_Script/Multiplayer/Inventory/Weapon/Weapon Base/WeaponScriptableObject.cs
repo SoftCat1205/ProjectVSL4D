@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponScriptableObject", menuName = "ScriptableObjects/Weapons")]
@@ -6,11 +7,8 @@ public class WeaponScriptableObject : ItemScriptableObject
 {
     [Header("Weapon Stats")]
 
-    [SerializeField] private GameObject prefab;
-    public GameObject Prefab => prefab;
-
-    [SerializeField] private Weapon weapon;
-    public Weapon Weapon => weapon;
+    [SerializeField] private NetworkObject weapon;
+    public NetworkObject Weapon => weapon;
 
     [SerializeField] private List<ItemCategory> category;
     public List<ItemCategory> Category => category;

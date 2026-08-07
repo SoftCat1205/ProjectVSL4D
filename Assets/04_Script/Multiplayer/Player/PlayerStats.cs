@@ -2,8 +2,7 @@ using Fusion;
 using UnityEngine;
 using System;
 
-public class
-PlayerStats : NetworkBehaviour
+public class PlayerStats : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private CharacterScriptableObject characterData;
@@ -37,6 +36,8 @@ PlayerStats : NetworkBehaviour
             Health = MaxHealth;
             IsAlive = true;
         }
+
+        StatsUpdate?.Invoke(this);
     }
 
     public void RecalculateStats()
@@ -129,6 +130,13 @@ PlayerStats : NetworkBehaviour
                 }
                 break;
         }
+    }
+
+    public void ModifyHealth(float amount)
+    {
+        Health = Mathf.Clamp(Health + amount, 0, MaxHealth);
+
+        StatsUpdate?.Invoke(this);
     }
 
     private void ClampStats()

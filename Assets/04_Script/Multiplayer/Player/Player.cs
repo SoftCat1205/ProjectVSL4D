@@ -6,8 +6,11 @@ public class Player : NetworkBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerFacing playerFacing;
     [SerializeField] private PlayerAim playerAim;
+    [SerializeField] private InventoryManager playerInventory;
+    [SerializeField] private EquipmentManager playerEquipment;
     [SerializeField] private WeaponManager playerWeapon;
     [SerializeField] private PlayerCamera playerCamera;
+    [SerializeField] private PlayerStats playerStats;
 
     [SerializeField] private WeaponScriptableObject startWeapon;
 
@@ -34,6 +37,8 @@ public class Player : NetworkBehaviour
     {
         Debug.Log($"Spawned! StateAuthority={Object.HasStateAuthority}, InputAuthority={Object.HasInputAuthority}");
 
-        playerWeapon.EquipWeapon(startWeapon, 0);
+        // playerWeapon.EquipWeapon(startWeapon, 0);
+        HUDManager.Instance.Initialize(this);
+        Debug.Log("Initialized HUD : Player Side");
     }
 }
